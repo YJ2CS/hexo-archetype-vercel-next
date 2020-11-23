@@ -1,0 +1,192 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+#网站标题
+title: "la-Blog"
+#网站副标题
+subtitle: "帮助你学习高级程序设计语言"
+#Sometimes your whole life boils down to one insame move      #详情
+description: "愿青年摆脱了冷气,只是向前走！"
+keywords: yj2cs
+#作者
+author: yj2cs
+# 语言
+language: zh-CN
+#时区
+timezone: UTC
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://yj2cs.github.io # wugenqiang是我的账号，修改为自己的账号
+root: /
+# default ':year/:month/:day/:title/'
+# another  ':abbrlink'
+# 不带后缀名会导致有的web server(比如常见的GitHub pages)发送错误的MIME类型，浏览器接收到非HTML的MIME，会默认进行下载
+# 所以支持带一个`/`后缀，或者以.html为后缀，需要有后缀
+# 具体到对`类markdown语法`友好，那么就选择以.html为后缀
+# 深层次原因可能是hexo部署的服务器url_rewrite功能设置有问题，
+# 由于hexo通常是部署在GitHub pages上的，问题也经常在GitHub pages上出现问题，所以这个问题应该是GitHub那边的主机问题，这是服务器环境配置上的问题。
+permalink: :urlname.html #:year/:month/:day/:title/
+permalink_defaults:
+#alg: crc32  # 算法：crc16(default) and crc32
+#rep: hex    # 进制：dec(default) and hex
+#短链接
+abbrlink:
+  alg: crc16 #算法： crc16(default) and crc32
+  rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags #标签
+archive_dir: archives  #归档
+category_dir: categories #类别
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render: README.md
+
+# Writing
+## see https://hexo.io/zh-cn/docs/configuration.html
+new_post_name: :title.md # File name of new posts
+# 基本的页面，用来指定你文章的基本样式，不DIY的话请保持默认选项，
+# 也可在*.md中提供 layout: 'shuoshuo' 这种方式指定其他单独的页面样式(需DIY)
+default_layout: post
+# Title case：特征就是句首字母大写，一些较「实」的词要首字母大写，而那些冠词、连词、介词、be 等较「虚」的词首字母不大写。但这界限的划分方式有很多种，是否要让 be 的各种形式首字母大写是最大的变数。Title case 也是常用于标题的。
+titlecase: false # Transform title into titlecase
+# 在新选项卡中打开外部链接
+external_link: # Open external links in new tab
+  enable: true
+# filename_case	把文件名称转换为 (1) 小写或 (2) 大写
+filename_case: 1
+# 对草稿提供渲染 render_drafts	显示草稿
+render_drafts: false
+# 图片文件夹
+post_asset_folder: false
+# relative_link是 Jekyll 和 GitHub 都建议关闭的功能，它可能存在有恶意漏洞
+# 默认情况下，Hexo 生成的超链接都是绝对地址。
+#  例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，
+#  那么绝对链接可能像这样：http://example.com/hello.html，它是绝对于域名的。
+#  相对链接像这样：/hello.html，也就是说，无论用什么域名访问该站点，都没有关系，
+#  这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。
+relative_link: false
+future: true
+# 代码高亮
+highlight:
+  enable: true #next->true
+#  enable: false #sakura->false
+  line_number: true
+  # 自动检测
+  auto_detect: false
+  # 制表符替换
+  tab_replace:
+
+#表示站内搜索
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ""
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+default_category: article
+category_map: categorys
+tag_map: tags
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination 0关闭分页
+per_page: 0
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+#theme: landscape
+theme: next
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  #repository: https://github.com/wugenqiang/wugenqiang.github.io.git #复制过来
+  #branch: master
+  repo:
+    github: https://github.com/wugenqiang/wugenqiang.github.io.git,master
+    # coding: https://dev.tencent.com/u/wugenqiang/p/wugenqiang.coding.me.git,master
+    gitee: https://gitee.com/wugenqiang/wugenqiang.git,master
+
+# hexo-admin authentification
+admin:
+  deployCommand: "./hexo-publish.bat" #windows
+#  deployCommand: './hexo-publish.sh' #linux
+
+sitemap:
+  path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
+tag_cloud:
+  textFont: Trebuchet MS, Helvetica
+  textColor: '#fc6423'
+  textHeight: 17
+  outlineColor: '#b3e5ef'
+  maxSpeed: 0.07
+
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+## cn_Docs: https://markdown-it.docschina.org/api/MarkdownIt.html#markdownit-new
+markdown:
+  render:
+    # false。设成 true 来启用在源码中(支持) HTML 标签。注意！这是不安全的！你可能需要额外的消毒剂(sanitizer)来组织来自 XSS 的输出。最好是通过插件来扩展特性，而不是启用 HTML。
+    html: true
+    # 设成 true 来给闭合的单个标签（<br />）添加 '/'。只有完全兼容 CommonMark 模式时才需要这样做。实际上你只需要 HTML 输出。
+    xhtmlOut: false
+    # 设成 true 来转化段落里的 \n 成 <br>
+    breaks: true
+    # 设成 true 来自动转化像 URL 的文本成链接。
+    linkify: true
+    # 设成 true 来启用某些语言中性的替换以及引号的美化（智能引号）。
+    typographer: true
+    # String 或 Array 类型。在 typographer 启用和支持智能引号时，进行双引号 + 单引号对替换。 比方说，
+    # 你可以支持 '«»„“' 给俄罗斯人使用， '„“‚‘' 给德国人使用。
+    # 还有 ['«\xA0', '\xA0»', '‹\xA0', '\xA0›']  给法国人使用（包括 nbsp）。
+    quotes: "“”‘’"
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+    - markdown-it-emoji # add emoji
+  anchors:
+    level: 1
+    collisionSuffix: "v"
+    # If `true`, creates an anchor tag with a permalink besides the heading.
+    # 如果为“true”，则在标题旁边创建一个带有永久链接的定位标记。
+    permalink: false
+    permalinkClass: header-anchor
+    # The symbol used to make the permalink
+    # 用于生成永久链接的符号
+    permalinkSymbol: ˃
+
+server:
+  port: 5000
+  compress: true
+  header: true
