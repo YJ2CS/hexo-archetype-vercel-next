@@ -1,15 +1,4 @@
-# Direct dependencies
-mkdocs>=1.1.2
-Pygments>=2.7.2
-markdown>=3.3.3
-# foam templete
-mkdocs-material>=6.1.5
-mkdocs-roamlinks-plugin>=0.1.3
-mkdocs-exclude>=1.0.2
-mkdocs-rss-plugin>=0.9.0
-mkdocs-minify-plugin>=0.3.0
-mkdocs-redirects>=1.0.1
 # Markdown-Toolbox
-Markdown-Toolbox==0.0.7
+Markdown-Toolbox==0.0.9
 PySide2==5.15.2
 shiboken2==5.15.2

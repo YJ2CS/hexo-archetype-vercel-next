@@ -426,3 +426,6 @@ dist
 /.deploy_git/
 db.json
 package-lock.json
+# hexo主题目录
+/themes/
+
