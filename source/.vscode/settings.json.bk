@@ -35,5 +35,6 @@
   },
   "vscodeMarkdownNotes.noteCompletionConvention": "noExtension",
   "vscodeMarkdownNotes.slugifyMethod": "github-slugger",
-  "python.pythonPath": "venv\\Scripts\\python.exe"
+  "python.pythonPath": "venv\\Scripts\\python.exe",
+  "cmake.configureOnOpen": false
 }
