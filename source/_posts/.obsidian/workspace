@@ -1,0 +1,165 @@
+{
+  "main": {
+    "id": "d9b569a31cb37a45",
+    "type": "split",
+    "children": [
+      {
+        "id": "b80b45d399012b6e",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "记录wordpress迁移网站-从阿里云到阿里云.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "dcee9f23853266f1",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "记录wordpress迁移网站-从阿里云到阿里云.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "3452d5d0363c9dce",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "记录wordpress迁移网站-从阿里云到阿里云.md",
+            "mode": "preview"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5449c06af320cad5",
+    "type": "split",
+    "children": [
+      {
+        "id": "9b22c3048002fb70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a3f60cebc480ef5b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "1aada9d95e67682a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "930178afdb41b469",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b90ac130dbc59c75",
+    "type": "split",
+    "children": [
+      {
+        "id": "683247c5404899d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f963868fef23cb4b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "记录wordpress迁移网站-从阿里云到阿里云.md"
+              }
+            }
+          },
+          {
+            "id": "c5d98225ce5c81b2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
+          },
+          {
+            "id": "287bfc7a74c9ee65",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "记录wordpress迁移网站-从阿里云到阿里云.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "f586cecb237abb21",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "lastOpenFiles": [
+    "记录wordpress迁移网站-从阿里云到阿里云.md",
+    "_drafts/Untitled.md",
+    "_drafts/test.md",
+    "typora-picgo-gitee-picturebed-cool.md",
+    "upgrade.md",
+    "_drafts/WhatIsThis.md",
+    "_drafts/te.md",
+    "_drafts/2020-12-13.md",
+    "_posts/0-2-ebooks.md",
+    "Day Planners/Day Planner-20201213.md"
+  ]
+}
