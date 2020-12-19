@@ -28,11 +28,15 @@ root: /
 # 具体到对`类markdown语法`友好，那么就选择以.html为后缀
 # 深层次原因可能是hexo部署的服务器url_rewrite功能设置有问题，
 # 由于hexo通常是部署在GitHub pages上的，问题也经常在GitHub pages上出现问题，所以这个问题应该是GitHub那边的主机问题，这是服务器环境配置上的问题。
-permalink: :url.html #:year/:month/:day/:title/
+permalink: :url/ #:year/:month/:day/:title/
 permalink_defaults:
   langu: cn # :langu -> cn (replace),
   #then you can write like this: permalink: :langu/:title/
   # in this,:lang will be replaced with cn
+
+#是否在永久链接中保留尾部的 .html, 设置为 false 时去除 (对尾部的 index.html无效)
+pretty_urls:
+  trailing_html: false
 
 #短链接
 # package.json
