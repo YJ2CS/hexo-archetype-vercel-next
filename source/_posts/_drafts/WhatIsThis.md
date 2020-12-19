@@ -1,6 +1,6 @@
 ---
-title: 垃圾篓
-url: 垃圾篓
+title: WhatIsThis
+url: WhatIsThis
 author: YJ2CS
 avatar: 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/avatar.jpg'
 authorLink: YJ2CS.github.io
@@ -14,7 +14,7 @@ tags:
 keywords: Sakura
 photos: 'https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php?abbrlink='
 abbrlink: 
-date: {{time}}
+date: 2020-12-14 23:09:07
 ---
 
 这个文件夹用来存放一些早晚会删除的过期归档文件以及一些草稿.

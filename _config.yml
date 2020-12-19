@@ -30,12 +30,16 @@ root: /
 # 由于hexo通常是部署在GitHub pages上的，问题也经常在GitHub pages上出现问题，所以这个问题应该是GitHub那边的主机问题，这是服务器环境配置上的问题。
 permalink: :url.html #:year/:month/:day/:title/
 permalink_defaults:
-#alg: crc32  # 算法：crc16(default) and crc32
-#rep: hex    # 进制：dec(default) and hex
+  langu: cn # :langu -> cn (replace),
+  #then you can write like this: permalink: :langu/:title/
+  # in this,:lang will be replaced with cn
+
 #短链接
-abbrlink:
-  alg: crc16 #算法： crc16(default) and crc32
-  rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
+# package.json
+#     "hexo-abbrlink": "^2.2.1",
+#abbrlink:
+#  alg: crc16 #算法： crc16(default) and crc32
+#  rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
 
 # Directory
 source_dir: source

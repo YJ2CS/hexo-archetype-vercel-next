@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "d61fc1bf29bb2717",
+        "id": "b5addddb139f3608",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "_drafts/2020-12-13.md",
+            "file": "_drafts/WhatIsThis.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -19,12 +19,12 @@
         }
       },
       {
-        "id": "8afb5270a59cab1b",
+        "id": "4469ab02c2f5d880",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "_drafts/2020-12-13.md",
+            "file": "_drafts/WhatIsThis.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -34,13 +34,13 @@
         }
       },
       {
-        "id": "3452d5d0363c9dce",
+        "id": "ab10d5be6f9ef3e0",
         "type": "leaf",
         "active": true,
         "state": {
           "type": "markdown",
           "state": {
-            "file": "_drafts/2020-12-13.md",
+            "file": "_drafts/WhatIsThis.md",
             "mode": "preview"
           }
         }
@@ -70,7 +70,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "eclipse",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -107,7 +107,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_drafts/2020-12-13.md"
+                "file": "_drafts/WhatIsThis.md"
               }
             }
           },
@@ -127,7 +127,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/2020-12-13.md",
+                "file": "_drafts/WhatIsThis.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -144,23 +144,23 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "lastOpenFiles": [
-    "_drafts/2020-12-13.md",
-    "python/0-1-如何学python.md",
-    "python/0-0-python目录.md",
-    "记录wordpress迁移网站-从阿里云到阿里云.md",
-    "_drafts/Untitled.md",
-    "_drafts/test.md",
-    "typora-picgo-gitee-picturebed-cool.md",
-    "upgrade.md",
     "_drafts/WhatIsThis.md",
-    "_drafts/te.md"
+    "_imgs/Pasted image 20201209155849.png",
+    "_daily/2020-12-12.md",
+    "_daily/2020-12-13.md",
+    "_daily/2020-12-14.md",
+    "Day Planners/Day Planner-20201214.md",
+    "_drafts/2020-12-13.md",
+    "_template/templator.md",
+    "_template/templatorDaily.md",
+    "java/1-1-java程序设计概述.md"
   ]
 }
