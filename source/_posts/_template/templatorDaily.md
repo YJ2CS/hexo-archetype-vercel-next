@@ -12,8 +12,7 @@ comments: true
 tags:
   - 悦读
 keywords: Sakura
-photos: 'https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php?abbrlink='
-abbrlink: 
+photos: 'https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php?abbrlink={{tp_title}}'
 date: {{tp_today}} {{tp_time:f=HH:mm:ss}}
 ---
 {{tp_daily_quote}}

@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "5.2.0"
+    "version": "5.3.0"
   },
   "dependencies": {
-    "hexo": "^5.2.0",
-    "hexo-admin": "^2.3.0",
+    "hexo": "^5.3.0",
     "hexo-deployer-git": "^2.1.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-baidu-sitemap": "^0.1.9",
@@ -28,7 +27,7 @@
     "hexo-server": "^2.0.0",
     "hexo-symbols-count-time": "^0.7.1",
     "hexo-tag-cloud": "^2.1.2",
-    "hexo-theme-next": "^8.0.2",
+    "hexo-theme-next": "^8.1.0",
     "hexo-wordcount": "^6.0.1",
     "image-size": "^0.9.3",
     "live2d-widget-model-koharu": "^1.0.5",

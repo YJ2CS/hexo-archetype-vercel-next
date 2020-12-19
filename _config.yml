@@ -137,8 +137,8 @@ deploy:
     gitee: https://gitee.com/wugenqiang/wugenqiang.git,master
 
 # hexo-admin authentification
-admin:
-  deployCommand: "./hexo-publish.bat" #windows
+#admin:
+#  deployCommand: "./hexo-publish.bat" #windows
 #  deployCommand: './hexo-publish.sh' #linux
 
 sitemap:
