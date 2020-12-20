@@ -258,23 +258,17 @@ footer:
 # ---------------------------------------------------------------
 
 # -------------------------修改摘录(excerpt)方式-------------------
-# Automatically excerpt description in homepage as preamble text.
 
+# Automatically excerpt description in homepage as preamble text.
 #是否自动摘录主页中的描述作为前导文本。# TODO 是否自动摘录
 # 使用 front-matter 的 description 字段作为简介显示在博客列表页（当字段为空时显示完整博客），关闭
-# 在文章的 front-matter 中添加 description，并提供文章摘录, front-matter是每个md前的配置段 ---开头,---结束
-#excerpt_description: true
-# Automatically Excerpt. Not recommend.
-# Use <!-- more --> in the post to control excerpt accurately.
-# 然后在文章中需要截断的地方加上代码：
-# <!-- more -->
+# 在文章的 front-matter 中添加 description，并提供文章摘录,
+# front-matter是每个md前的配置段 ---开头,---结束
+# 解析文章中的description 字段 作为摘录
+excerpt_description: false
 
-auto_excerpt:
-# 自动摘录，开启，暂时没发现bug
-  enable: true
-  length: 150
-# Automatically scroll page to section which is under <!-- more --> mark.
-#scroll_to_more: true
+# 更推荐的做法是文章中需要截断的地方加上代码：
+# <!-- more -->
 
 # -------------------------修改摘录(excerpt)方式 END---------------
 

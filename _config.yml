@@ -231,8 +231,31 @@ live2d:
     hOffset: 0
     vOffset: -20
   mobile:
-    show: true
+    show: false
     scale: 0.5
   react:
     opacityDefault: 0.7
     opacityOnHover: 0.2
+
+# 自动摘录
+# 本插件通过注册generator对所有文章在生成的时候进行处理，
+# 如果文章内容含有10个一级html标签，那么取这10个做为列表页面摘要，否则全部显示。
+# 您可以通过在配置中设置深度（默认值为 10）来指定摘录的大小。
+# 还可以使用 css 选择器从生成的摘录中排除某些标记。将排除与任何选择器匹配的标记。
+# 默认行为 hideWholePostExcerpts: false 是只显示摘录，如果它不会是整个职位。设置为覆盖它，并显示整个帖子摘录。
+excerpt:
+  depth: 10
+  excerpt_excludes: []
+  more_excludes: []
+  hideWholePostExcerpts: true
+
+# 下面这种做法在next7.6版本后已经不再支持
+# Automatically Excerpt. Not recommend.
+# Use <!-- more --> in the post to control excerpt accurately.
+## 自动摘录，开启，暂时没发现bug
+#auto_excerpt:
+#  enable: true
+#  length: 150
+#  scroll_to_more: true
+# Automatically scroll page to section which is under <!-- more --> mark.
+
