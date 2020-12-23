@@ -422,11 +422,14 @@ dist
 .pnp.*
 
 # hexo
-/public/
-/.deploy_git/
+/public
+/.deploy_git
 db.json
 #package-lock.json
-# hexo主题目录
+
+/bfg-1.13.0.jar
+
 /themes/
 _admin-config.yml
-
+/source/_posts/_云笔记/
+/source/_posts/_私密信息/

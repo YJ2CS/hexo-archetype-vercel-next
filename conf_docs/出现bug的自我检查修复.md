@@ -1,6 +1,6 @@
 ---
-title: 
-url: 
+title: 出现bug的自我检查修复
+url: 出现bug的自我检查修复
 author: YJ2CS
 avatar: 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/avatar.jpg'
 authorLink: YJ2CS.github.io
@@ -12,8 +12,9 @@ comments: true
 tags:
   - 悦读
 keywords: Sakura
-photos: 'https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php'
-abbrlink: f05b
+photos: 'https://random.52ecy.cn/randbg.php?size=1&rid-出现bug的自我检查修复'
+
+ 
 date: 2020/11/28
 ---
 

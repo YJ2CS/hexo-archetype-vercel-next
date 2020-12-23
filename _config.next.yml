@@ -14,7 +14,7 @@ cache:
   enable: true
 
 # Remove unnecessary files after hexo generate.
-minify: false
+minify: true
 
 # Define custom file paths.
 # Create your custom files in site directory `source/_data` and uncomment needed files below.
@@ -42,7 +42,7 @@ custom_file_path:
 scheme: Gemini
 
 # Dark Mode
-darkmode: false
+darkmode: true
 
 
 # ---------------------------------------------------------------
@@ -96,8 +96,6 @@ menu: #目录 #首页 fa-home 字体漂亮图标 下同
   #love: https://wugenqiang.gitee.io/wgq520mll/ || heart #告白
   #友链
   links: /links/ || paper-plane
-  #技术笔记
-  ibooks: https://wugenqiang.github.io/NoteBook/ || book
   #书籍
   # book: https://wugenqiang.gitee.io/ibooks/ || book
   #photos: /photos/ || camera #摄影相册
@@ -159,7 +157,7 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
-  GitHub: https://github.com/yj2cs || fab fa-github
+  #GitHub: https://github.com/yj2cs || fab fa-github
   #E-Mail: mailto:yourname@gmail.com || fa fa-envelope
   #Weibo: https://weibo.com/yourname || fab fa-weibo
   #Google: https://plus.google.com/yourname || fab fa-google
@@ -169,6 +167,16 @@ social:
   #YouTube: https://youtube.com/yourname || fab fa-youtube
   #Instagram: https://instagram.com/yourname || fab fa-instagram
   #Skype: skype:yourname?call|chat || fab fa-skype
+
+  gitee:  https://gitee.com/yj2cs || fab fa-github-alt
+  github:  http://github.com/yj2cs || fab fa-github
+  csdn:  https://blog.csdn.net/yj2cs || fab fa-cuttlefish
+  zhihu: https://www.zhihu.com/people/yj2cs || fab fa-zhihu
+  #jianshu: {url: /https://www.jianshu.com/u/9b726a534140, img: /img/social/jianshu.png}
+  # sina: {url: http://weibo.com/3829198906/info, img: /img/social/sina.png}
+  bilibili: https://space.bilibili.com/5323885 || fas fa-bold
+  #wangyiyun: {url: https://music.163.com/#/user/home?id=337394988, img: /img/social/wangyiyun.png}
+  E-Mail: mailto:cnyjzhang@outlook.com || fa fa-envelope
 
 social_icons: #设置图标是否显示这里
   #表示开启
@@ -311,6 +319,13 @@ reward:
   #alipay: /images/alipay.png
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
+#  paypal: #https://www.paypal.me/hojuncn
+  alipay: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/AliPay.jpg #大图
+#  alipayQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/AliPayQR.jpg
+#  alipayHBQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/AliPayHBQR.jpg
+  wechat: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/WeChatPay.png #大图
+#  wechatQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/WeChanQR.jpg #微信收款码
+#  wechatSQ: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/WeChanSQ.jpg #赞赏码
 
 # Subscribe through Telegram Channel, Twitter, etc.
 # Usage: `Key: permalink || icon` (Font Awesome)
@@ -1038,5 +1053,4 @@ hide:
 
 # visitors count
 counter: true
-
 

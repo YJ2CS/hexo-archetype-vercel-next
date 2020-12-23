@@ -12,11 +12,13 @@ comments: true
 tags:
   - hexo
 keywords: Sakura
-photos: https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php?abbrlink=bad1
-abbrlink: c370
+photos: https://random.52ecy.cn/randbg.php?size=1&rid-bad1
+
+ 
 date: 2020-11-16 17:54:00
 ---
 [[hexo博客搭建]]
+
 
 检查网页元素，发现这里是custom-logo-img,
 ![file](images/next%E4%B8%BB%E9%A2%98-custom-logo%E8%AE%BE%E7%BD%AE-images/image-1605417312795.png)
