@@ -1,5 +1,5 @@
 title: 友链
-author: WuGenQiang
+author: Lamirs
 type: links
 updated: 2019-05-26 22:21:04
 date: 2019-05-26 08:03:27
@@ -18,5 +18,4 @@ date: 2019-05-26 08:03:27
   > 说明：Sometimes your whole life boils down to one insame move. 
 
   2. 然后按照以上格式在本页下方评论区留言，待博主为您添上友链（`推荐方式`）
-  3. 发送 Email :   <a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=Gm1vfX90a3N7dH1aa2s0eXV3" style="text-decoration:none;">2422676183@qq.com</a>
-看到就上链哟
+  3. 发送 Email :  <a href="mailto:cnyjzhang@outlook.com?subject=申请友链&body=名称：<br> 头像：<br> 主页：<br> 说明：<br> ">点击发送友链申请邮件，看见就会添加
