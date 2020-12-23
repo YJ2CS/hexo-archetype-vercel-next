@@ -4,7 +4,7 @@ type: links
 updated: 2019-05-26 22:21:04
 date: 2019-05-26 08:03:27
 ---
-🐹 🥎  💦 <table><tr><td bgcolor=#D1EEEE>:love_letter: 排名不分先后，如需交换友链请看下面</td></tr></table>
+🐹 🥎  💦 <table><tr>:love_letter: 排名不分先后，如需交换友链请看下面</tr></table>
 
 🐣 申请要求：
   1. 内容持续更新且可以稳定访问
