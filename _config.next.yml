@@ -95,12 +95,12 @@ menu: #目录 #首页 fa-home 字体漂亮图标 下同
   #commonweal: /404/ || fa fa-heartbeat
   #love: https://wugenqiang.gitee.io/wgq520mll/ || heart #告白
   #友链
-  links: /links/ || paper-plane
+  友链: /links/ || fa fa-link
   #书籍
   # book: https://wugenqiang.gitee.io/ibooks/ || book
   #photos: /photos/ || camera #摄影相册
   #工具Box
-  toolBox: /laboratory/toolBox/index.html || amazon
+  工具箱: /laboratory/toolBox/ || fa fa-toolbox
 
 # Enable / Disable menu icons / item badges.
 #目录设置，如果设置icon: false则无图标，badges: true则标签都会显示数字
