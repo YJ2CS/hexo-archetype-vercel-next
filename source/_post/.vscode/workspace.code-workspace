@@ -6,7 +6,7 @@
   ],
   "settings": {
     "vscodeMarkdownNotes.compileSuggestionDetails": true,
-    "vscodeMarkdownNotes.newNoteTemplate": "---\ntitle: ${noteName}\nurl: ${noteName}\nauthor: YJ2CS\navatar: 'https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/custom/avatar.jpg'\nauthorLink: YJ2CS.github.io\nauthorAbout: 愿青年摆脱了冷气，只是向前走！\nauthorDesc: 愿青年摆脱了冷气，只是向前走！\ncategories:\n  - 文章\ncomments: true\ntags:\n  - 悦读\nkeywords: Sakura\nphotos: https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php?r_id=?number=Math.random(); \ndate: ${timestamp}\n---\n\n"    "editor.minimap.enabled": false,
+    "vscodeMarkdownNotes.newNoteTemplate": "---\ntitle: ${noteName}\nurl: ${noteName}\nauthor: YJ2CS\navatar: 'https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/avatar.jpg'\nauthorLink: YJ2CS.github.io\nauthorAbout: 愿青年摆脱了冷气，只是向前走！\nauthorDesc: 愿青年摆脱了冷气，只是向前走！\ncategories:\n  - 文章\ncomments: true\ntags:\n  - 悦读\nkeywords: Sakura\nphotos: https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php?r_id=?number=Math.random(); \ndate: ${timestamp}\n---\n\n"    "editor.minimap.enabled": false,
     "editor.wrappingIndent": "indent",
     "editor.overviewRulerBorder": false,
     "editor.codeActionsOnSave": {

@@ -140,7 +140,7 @@ sidebar:
 # Sidebar Avatar
 avatar: #头像图片路径 图片放置在next/source/images
   # Replace the default image and set the url here. TODO
-  url: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/avatar.jpg
+  url: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/avatar.jpg
   # If true, the avatar will be dispalyed in circle.
   #是否显示圆形头像，true表示圆形，false默认
   rounded: true
@@ -320,12 +320,12 @@ reward:
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
 #  paypal: #https://www.paypal.me/hojuncn
-  alipay: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/AliPay.jpg #大图
-#  alipayQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/AliPayQR.jpg
-#  alipayHBQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/AliPayHBQR.jpg
-  wechat: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/WeChatPay.png #大图
-#  wechatQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/WeChanQR.jpg #微信收款码
-#  wechatSQ: https://cdn.jsdelivr.net/gh/yj2cs/cdn/img/custom/donate/WeChanSQ.jpg #赞赏码
+  alipay: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/AliPay.jpg #大图
+#  alipayQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/AliPayQR.jpg
+#  alipayHBQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/AliPayHBQR.jpg
+  wechat: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/WeChatPay.png #大图
+#  wechatQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/WeChanQR.jpg #微信收款码
+#  wechatSQ: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/WeChanSQ.jpg #赞赏码
 
 # Subscribe through Telegram Channel, Twitter, etc.
 # Usage: `Key: permalink || icon` (Font Awesome)
