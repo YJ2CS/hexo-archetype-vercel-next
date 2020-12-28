@@ -431,5 +431,5 @@ db.json
 
 /themes/
 _admin-config.yml
-/source/_posts/_云笔记/
-/source/_posts/_私密信息/
+#/source/_posts/_云笔记/
+#/source/_posts/_私密信息/

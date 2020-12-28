@@ -4,36 +4,34 @@
 ## see https://hexo.io/zh-cn/docs/configuration.html
 
 # Site
-#网站标题
+# 网站标题
 title: Lamirs ☆ Daze
-#网站副标题
+# 网站副标题
 subtitle: "帮助你学习高级程序设计语言"
-#Sometimes your whole life boils down to one insame move      #详情
+# Sometimes your whole life boils down to one insame move      #详情
 description: "愿青年摆脱了冷气,只是向前走！"
-keywords: yj2cs
-#作者
+# 作者
 author: yj2cs
 # 语言
 language: zh-CN
-#时区
+# 时区
 timezone: UTC
 
 # URL
+# 注意，此选项一定要符合你实际的域名,影响gitalk的配置
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://yj2cs.github.io # wugenqiang是我的账号，修改为自己的账号
+url: https://lamirs.vercel.app # wugenqiang是我的账号，修改为自己的账号
 root: /
+
 # default ':year/:month/:day/:title/'
-# another  ':abbrlink'
+# ':year/:month/:day/:title/' | ':abbrlink' | ':url/' | <another link>
 # 不带后缀名会导致有的web server(比如常见的GitHub pages)发送错误的MIME类型，浏览器接收到非HTML的MIME，会默认进行下载
-# 所以支持带一个`/`后缀，或者以.html为后缀，需要有后缀
-# 具体到对`类markdown语法`友好，那么就选择以.html为后缀
-# 深层次原因可能是hexo部署的服务器url_rewrite功能设置有问题，
-# 由于hexo通常是部署在GitHub pages上的，问题也经常在GitHub pages上出现问题，所以这个问题应该是GitHub那边的主机问题，这是服务器环境配置上的问题。
-permalink: ':url/'  #:year/:month/:day/:title/
+# 所以，请带一个`/`后缀，或者以.html为后缀，即必须需要有后缀
+permalink: ':url/'
 permalink_defaults:
   langu: cn # :langu -> cn (replace),
   #then you can write like this: permalink: :langu/:title/
-  # in this,:lang will be replaced with cn
+  # in this,:langu will be replaced with cn
 
 # 改写 permalink 的值来美化 URL
 pretty_urls:
@@ -45,9 +43,9 @@ pretty_urls:
 #短链接
 # package.json
 #     "hexo-abbrlink": "^2.2.1",
-#abbrlink:
-#  alg: crc16 #算法： crc16(default) and crc32
-#  rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
+# abbrlink:
+#   alg: crc16 #算法： crc16(default) and crc32
+#   rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
 
 # Directory
 source_dir: source
@@ -62,7 +60,7 @@ skip_render:
   - "_posts/Find unlinked files plugin output.md"
 
 # Writing
-## see https://hexo.io/zh-cn/docs/configuration.html
+# see https://hexo.io/zh-cn/docs/configuration.html
 new_post_name: :title.md # File name of new posts
 # 基本的页面，用来指定你文章的基本样式，不DIY的话请保持默认选项，
 # 也可在*.md中提供 layout: 'shuoshuo' 这种方式指定其他单独的页面样式(需DIY)
@@ -78,18 +76,20 @@ filename_case: 1
 render_drafts: false
 # 图片文件夹
 post_asset_folder: false
-# relative_link是 Jekyll 和 GitHub 都建议关闭的功能，它可能存在有恶意漏洞
+# 注意：relative_link是 Jekyll 和 GitHub 都建议关闭的功能
 # 默认情况下，Hexo 生成的超链接都是绝对地址。
-#  例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，
-#  那么绝对链接可能像这样：http://example.com/hello.html，它是绝对于域名的。
-#  相对链接像这样：/hello.html，也就是说，无论用什么域名访问该站点，都没有关系，
-#  这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。
+# 例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，
+# 那么绝对链接可能像这样：http://example.com/hello.html，它是绝对于域名的。
+# 相对链接像这样：/hello.html，也就是说，无论用什么域名访问该站点，都没有关系，
+# 这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。
 relative_link: false
+# 显示未来（Time）的文章
 future: true
+
 # 代码高亮
 highlight:
   enable: true #next->true
-#  enable: false # highlight有安全风险，换成prismjs
+  # enable: false # highlight有安全风险，换成prismjs
   line_number: true
   # 自动检测
   auto_detect: false
@@ -101,7 +101,8 @@ prismjs:
   preprocess: true
   line_number: true
   tab_replace: ''
-#表示站内搜索
+
+# 站内搜索
 search:
   path: search.xml
   field: post
@@ -112,7 +113,7 @@ search:
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
-#  per_page应当与主题的设置相对应，有些主题设置中会有一个 类似homeArticleShown的选项
+# per_page应当与主题的设置相对应，有些主题设置中会有一个 类似homeArticleShown的选项
 index_generator:
   path: ""
   per_page: 5
@@ -124,9 +125,9 @@ category_map: categorys
 tag_map: tags
 
 # Date / Time format
-## Hexo uses Moment.js to parse and display date
-## You can customize the date format as defined in
-## http://momentjs.com/docs/#/displaying/format/
+# Hexo uses Moment.js to parse and display date
+# You can customize the date format as defined in
+# http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 
@@ -136,9 +137,9 @@ per_page: 0
 pagination_dir: page
 
 # Extensions
-## Plugins: https://hexo.io/plugins/
-## Themes: https://hexo.io/themes/
-#theme: landscape
+# Plugins: https://hexo.io/plugins/
+# Themes: https://hexo.io/themes/
+# defaults: theme: landscape
 theme: next
 
 # Deployment
@@ -150,7 +151,7 @@ deploy:
   #branch: master
   repo:
     github: https://github.com/YJ2CS/yj2cs.github.io.git,master
-    coding: https://e.coding.net/yj2cs/o/yj2cs.coding.me.git,master
+    # coding: https://e.coding.net/yj2cs/o/yj2cs.coding.me.git,master
     # gitee: https://gitee.com/wugenqiang/wugenqiang.git,master
 
 # sitemap setting 用于搜索引擎扫描你的站点时，确定你站点的结构
@@ -159,6 +160,7 @@ sitemap:
 baidusitemap:
   path: baidusitemap.xml
 
+# 标签云
 tag_cloud:
   textFont: Trebuchet MS, Helvetica
   textColor: '#fc6423'
@@ -192,6 +194,25 @@ markdown:
     - markdown-it-sub
     - markdown-it-sup
     - markdown-it-emoji # add emoji
+    # 增加对wikilinks的解析支持
+    # [[title home]] -> [title_home](...)
+    - name: '@gerhobbelt/markdown-it-wikilinks'
+      options:
+        # deaault: linkPattern: /\[\[([^\x00-\x1f|]+?)(\|([\s\S]+?))?\]\]/,          // accept anything, except control characters (CR, LF, etc) or |
+        # linkPattern: /\[\[([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+)(\|([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+))?\]\]/
+        # 将所有 wiki 链接渲染为绝对链接。
+        # 默认： false
+        # 这项要根据你前面对链接的渲染设置来更改
+        makeAllLinksAbsolute: true
+        # 绝对链接的前缀
+        # default: /
+        # baseURL: 'https://lamirs.vercel.app/'
+        # url的后缀,
+        # default: .html
+        # [[title home]] -> [title_home](...title_home/index.html),注意后缀从默认的.html更改为 /index.html
+        # uriSuffix: '/index.html'
+        uriSuffix: ''
+
   anchors:
     level: 1
     collisionSuffix: "v"
@@ -215,21 +236,22 @@ live2d:
   enable: true
   # enable: false
   scriptFrom: local # 默认
+    # scriptFrom: jsdelivr # jsdelivr CDN
+  # scriptFrom: unpkg # unpkg CDN
+  # scriptFrom: https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js # 你的自定义 url
   pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
   pluginJsPath: lib/ # 脚本文件相对与插件根目录路径
   pluginModelPath: assets/ # 模型文件相对与插件根目录路径
-  # scriptFrom: jsdelivr # jsdelivr CDN
-  # scriptFrom: unpkg # unpkg CDN
-  # scriptFrom: https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js # 你的自定义 url
   tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
   debug: false # 调试, 是否在控制台输出日志
   model:
     use: live2d-widget-model-koharu
-#    use: live2d-widget-model-wanko # npm-module package name
+    # use: live2d-widget-model-wanko # npm-module package name
     # use: wanko # 博客根目录/live2d_models/ 下的目录名
     # use: ./wives/wanko # 相对于博客根目录的路径
     # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url
-#-------------------------------------------------------------------
+
+# -------------------------------------------------------------------
     # Live2D General Settings
     ## https://github.com/xiazeyu/live2d-widget.js
     ## https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init
@@ -240,7 +262,7 @@ live2d:
     superSample: 2
     width: 150
     height: 300
-#    position: right
+    # position: right
     position: 'left'
     hOffset: 0
     vOffset: -20
@@ -259,8 +281,8 @@ live2d:
 # 默认行为 hideWholePostExcerpts: false 是只显示摘录，如果它不会是整个职位。设置为覆盖它，并显示整个帖子摘录。
 excerpt:
   depth: 10
-  excerpt_excludes: []
-  more_excludes: []
+  excerpt_excludes: [ ]
+  more_excludes: [ ]
   hideWholePostExcerpts: true
 
 # 下面这种做法在next7.6版本后已经不再支持
@@ -270,5 +292,5 @@ excerpt:
 #auto_excerpt:
 #  enable: true
 #  length: 150
+#  # Automatically scroll page to section which is under <!-- more --> mark.
 #  scroll_to_more: true
-# Automatically scroll page to section which is under <!-- more --> mark.

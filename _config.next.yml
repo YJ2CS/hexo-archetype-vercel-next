@@ -51,14 +51,13 @@ darkmode: true
 
 favicon:
   #小图标 默认的NexT
-  small: /images/favicon-16x16-next.png
+  small: /custom/favicon-16x16-next.png
   #中图标 默认NexT
-  medium: /images/favicon-32x32-next.png
+  medium: /custom/favicon-32x32-next.png
   #苹果触摸图标
   apple_touch_icon: /images/apple-touch-icon-next.png
   #safari固定标签
   safari_pinned_tab: /images/logo.svg
-  #android_manifest: /manifest.json
 
 # Custom Logo (Warning: Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
@@ -93,12 +92,10 @@ menu: #目录 #首页 fa-home 字体漂亮图标 下同
   #schedule: /schedule/ || fa fa-calendar
   #sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
-  #love: https://wugenqiang.gitee.io/wgq520mll/ || heart #告白
   #友链
   友链: /links/ || fa fa-link
   #书籍
   # book: https://wugenqiang.gitee.io/ibooks/ || book
-  #photos: /photos/ || camera #摄影相册
   #工具Box
   工具箱: /laboratory/toolBox/ || fa fa-toolbox
 
@@ -139,8 +136,8 @@ sidebar:
 
 # Sidebar Avatar
 avatar: #头像图片路径 图片放置在next/source/images
-  # Replace the default image and set the url here. TODO
-  url: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/avatar.jpg
+  # Replace the default image and set the url here.
+  url: /custom/avatar.webp
   # If true, the avatar will be dispalyed in circle.
   #是否显示圆形头像，true表示圆形，false默认
   rounded: true
@@ -178,7 +175,7 @@ social:
   #wangyiyun: {url: https://music.163.com/#/user/home?id=337394988, img: /img/social/wangyiyun.png}
   E-Mail: mailto:cnyjzhang@outlook.com || fa fa-envelope
 
-social_icons: #设置图标是否显示这里
+social_icons: #设置图标是否显示
   #表示开启
   enable: true
   #只显示图片
@@ -268,11 +265,9 @@ footer:
 # -------------------------修改摘录(excerpt)方式-------------------
 
 # Automatically excerpt description in homepage as preamble text.
-#是否自动摘录主页中的描述作为前导文本。# TODO 是否自动摘录
-# 使用 front-matter 的 description 字段作为简介显示在博客列表页（当字段为空时显示完整博客），关闭
-# 在文章的 front-matter 中添加 description，并提供文章摘录,
+# 是否自动使用 front-matter(md文档中的描述 description) 的 description 字段作为简介显示在博客列表页（当字段为空时显示完整博客）
 # front-matter是每个md前的配置段 ---开头,---结束
-# 解析文章中的description 字段 作为摘录
+# 在文章的 front-matter 中添加 description，以此提供文章摘录
 excerpt_description: false
 
 # 更推荐的做法是文章中需要截断的地方加上代码：
@@ -320,12 +315,12 @@ reward:
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
 #  paypal: #https://www.paypal.me/hojuncn
-  alipay: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/AliPay.jpg #大图
-#  alipayQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/AliPayQR.jpg
-#  alipayHBQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/AliPayHBQR.jpg
-  wechat: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/WeChatPay.png #大图
-#  wechatQR: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/WeChanQR.jpg #微信收款码
-#  wechatSQ: https://cdn.jsdelivr.net/gh/yj2cs/cdn/custom/donate/WeChanSQ.jpg #赞赏码
+  alipay: /custom/donate/AliPayQR.webp # 小图二维码
+#  alipayQR: /custom/donate/AliPayQR.jpg
+#  alipayHBQR: /custom/donate/AliPayHBQR.jpg
+  wechat: /custom/donate/WeChatQR.webp # 小图二维码
+#  wechatQR: /custom/donate/WeChanQR.jpg #微信收款码
+#  wechatSQ: /custom/donate/WeChanSQ.jpg #赞赏码
 
 # Subscribe through Telegram Channel, Twitter, etc.
 # Usage: `Key: permalink || icon` (Font Awesome)
@@ -431,7 +426,7 @@ back2top:
   # Back to top in sidebar.
   sidebar: false
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
 # Reading progress bar
 reading_progress:
@@ -453,7 +448,7 @@ bookmark:
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
   enable: false
-  permalink: https://github.com/yourname
+  permalink: https://github.com/yj2cs
   title: Follow me on GitHub
 
 
@@ -470,7 +465,7 @@ github_banner:
 # ---------------------------------------------------------------
 
 font:
-  enable: true
+  enable: false
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
   host:
@@ -529,7 +524,7 @@ exturl: false
 
 # Google Webmaster tools verification.
 # See: https://developers.google.com/search
-google_site_verification:
+google_site_verification: 4UOxOHqgu_mWNtuBH4c-_y9jKlD76z3Bq7Hj7Y9hgO4
 
 # Bing Webmaster tools verification.
 # See: https://www.bing.com/webmasters
@@ -541,10 +536,10 @@ yandex_site_verification:
 
 # Baidu Webmaster tools verification.
 # See: https://ziyuan.baidu.com/site
-baidu_site_verification:
+baidu_site_verification: code-52p1M7BOQx
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO.
-baidu_push: false
+baidu_push: true
 
 
 # ---------------------------------------------------------------
@@ -578,7 +573,7 @@ pjax: true
 
 # FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.
 # For more information: https://fancyapps.com/fancybox/
-fancybox: true
+fancybox: false
 
 # A JavaScript library for zooming images like Medium.
 # Warning: Do not enable both `fancybox` and `mediumzoom`.
@@ -632,7 +627,7 @@ comments:
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
-  lazyload: true
+  lazyload: false
   # Modify texts or order for any navs, here are some examples.
   nav:
     #disqus:
@@ -658,9 +653,11 @@ disqusjs:
   # Leave api empty if you are able to connect to Disqus API. Otherwise you need a reverse proxy for it.
   # For example:
   # api: https://disqus.skk.moe/disqus/
-  api:
-  apikey: # Register new application from https://disqus.com/api/applications/
-  shortname: # See: https://disqus.com/admin/settings/general/
+  api: https://disqus.skk.moe/disqus/
+  # Register new application from https://disqus.com/api/applications/
+  apikey: 'lTg2gpR7KgKJq9nZxRbO41bijSoNAfJuaLkzJaPXx0yKMyS00SARsrIvvxXyLi2S'
+  # See: https://disqus.com/admin/settings/general/
+  shortname: lamirs
 
 # Changyan
 # For more information: https://changyan.kuaizhan.com
@@ -677,12 +674,12 @@ livere_uid: # <your_uid>
 # Gitalk
 # For more information: https://gitalk.github.io
 gitalk:
-  enable: false
-  github_id: wugenqiang # GitHub repo owner
-  repo: wugenqiang.github.io # Repository name to store issues
-  client_id: # GitHub Application Client ID
-  client_secret: bab1ce865740e8dbb948 # GitHub Application Client Secret
-  admin_user: wugenqiang # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
+  enable: true
+  github_id: YJ2CS # GitHub repo owner
+  repo: legendary-octo-pancake # Repository name to store issues
+  client_id: ae8099a0e71c7134c4bc # GitHub Application Client ID
+  client_secret: bf8a5c3d6a77aab043991901fb3210bd074810fc # GitHub Application Client Secret
+  admin_user: YJ2CS # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
   distraction_free_mode: true # Facebook-like distraction free mode
   # Gitalk's display language depends on user's browser or system environment
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
@@ -792,7 +789,7 @@ algolia_search:
 
 # Local Search
 # Dependencies: https://github.com/next-theme/hexo-generator-searchdb
-local_search: #设置为true # TODO
+local_search: #设置为true
   enable: true
   # If auto, trigger search by changing input.
   # If manual, trigger search by pressing enter key or search button.
