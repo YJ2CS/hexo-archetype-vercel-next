@@ -1,4 +1,4 @@
 # Markdown-Toolbox
-Markdown-Toolbox==0.0.9
-PySide2==5.15.2
-shiboken2==5.15.2
+# Markdown-Toolbox==0.0.9
+# PySide2==5.15.2
+# shiboken2==5.15.2
