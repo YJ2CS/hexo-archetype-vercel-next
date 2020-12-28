@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/blog-hexo-foam-template-next.iml" filepath="$PROJECT_DIR$/.idea/blog-hexo-foam-template-next.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hexo-blog-template.iml" filepath="$PROJECT_DIR$/.idea/hexo-blog-template.iml" />
     </modules>
   </component>
 </project>
