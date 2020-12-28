@@ -1,0 +1,167 @@
+{
+  "main": {
+    "id": "d9b569a31cb37a45",
+    "type": "split",
+    "children": [
+      {
+        "id": "1037b81d80ad9f95",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "安装配置镜像加速.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "4531630b14b80808",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "安装配置镜像加速.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "5951ea14ae862194",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "安装配置镜像加速.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5449c06af320cad5",
+    "type": "split",
+    "children": [
+      {
+        "id": "9b22c3048002fb70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a3f60cebc480ef5b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "1aada9d95e67682a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": true,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "930178afdb41b469",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 265
+  },
+  "right": {
+    "id": "b90ac130dbc59c75",
+    "type": "split",
+    "children": [
+      {
+        "id": "683247c5404899d7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f963868fef23cb4b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "安装配置镜像加速.md"
+              }
+            }
+          },
+          {
+            "id": "c5d98225ce5c81b2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
+          },
+          {
+            "id": "d7466c868367e8e5",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "287bfc7a74c9ee65",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "安装配置镜像加速.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "安装配置镜像加速.md",
+    "_template/templator.md",
+    "10分钟重新认识git.md",
+    "安装配置科学上网工具.md",
+    "0-1-github-repo.md",
+    "0-2-ebooks.md",
+    "记录v2ray安装配置.md",
+    "评论系统Valine的使用.md",
+    "记录wsl2配置和使用.md",
+    "记录wordpress迁移网站-从阿里云到阿里云.md"
+  ]
+}
