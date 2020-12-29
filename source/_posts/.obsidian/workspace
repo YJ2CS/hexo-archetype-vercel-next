@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "1037b81d80ad9f95",
+        "id": "1c28628349d02d4b",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "安装配置镜像加速.md",
+            "file": "_drafts/Untitled.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -19,12 +19,12 @@
         }
       },
       {
-        "id": "4531630b14b80808",
+        "id": "22e36bea85ff304d",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "安装配置镜像加速.md",
+            "file": "_drafts/Untitled.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -34,13 +34,13 @@
         }
       },
       {
-        "id": "5951ea14ae862194",
+        "id": "d9fee11d58747dcf",
         "type": "leaf",
         "active": true,
         "state": {
           "type": "markdown",
           "state": {
-            "file": "安装配置镜像加速.md",
+            "file": "_drafts/Untitled.md",
             "mode": "source"
           }
         }
@@ -70,7 +70,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "cpp和opencv-运行环境",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -107,7 +107,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "安装配置镜像加速.md"
+                "file": "_drafts/Untitled.md"
               }
             }
           },
@@ -135,7 +135,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "安装配置镜像加速.md",
+                "file": "_drafts/Untitled.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -153,15 +153,15 @@
     "collapsed": true
   },
   "lastOpenFiles": [
-    "安装配置镜像加速.md",
-    "_template/templator.md",
+    "_drafts/Untitled.md",
+    "分享免费下载论文的网站.md",
     "10分钟重新认识git.md",
-    "安装配置科学上网工具.md",
-    "0-1-github-repo.md",
-    "0-2-ebooks.md",
-    "记录v2ray安装配置.md",
-    "评论系统Valine的使用.md",
-    "记录wsl2配置和使用.md",
-    "记录wordpress迁移网站-从阿里云到阿里云.md"
+    "_drafts/7-4-Spring-4.md",
+    "_drafts/win10环境下-mingw-w64-cmake-clion-安装及配置-cpp-和-opencv-运行环境.md",
+    "cpp和opencv-运行环境.md",
+    "安装cpp相关开发环境.md",
+    "eclipse调整字体大小.md",
+    "coding中找不到pages服务.md",
+    "重装windows.md"
   ]
 }

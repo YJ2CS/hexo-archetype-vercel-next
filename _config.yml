@@ -161,12 +161,12 @@ baidusitemap:
   path: baidusitemap.xml
 
 # 标签云
-tag_cloud:
-  textFont: Trebuchet MS, Helvetica
-  textColor: '#fc6423'
-  textHeight: 17
-  outlineColor: '#b3e5ef'
-  maxSpeed: 0.07
+#tag_cloud:
+#  textFont: Trebuchet MS, Helvetica
+#  textColor: '#fc6423'
+#  textHeight: 17
+#  outlineColor: '#b3e5ef'
+#  maxSpeed: 0.07
 
 # Markdown-it config
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki

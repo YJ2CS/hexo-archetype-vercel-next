@@ -32,12 +32,16 @@ const langToMomentLocale = {
     ar: "ar",
     ja: "ja",
 };
-async function configureMomentLocale() {
+async function configureMomentLocale(settings) {
     var _a;
-    const obsidianLang = localStorage.getItem("language");
+    const obsidianLang = localStorage.getItem("language") || "en";
     const systemLang = (_a = navigator.language) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+    const localeOverride = settings.localeOverride || "system-default";
     let momentLocale = langToMomentLocale[obsidianLang];
-    if (systemLang.startsWith(obsidianLang)) {
+    if (localeOverride !== "system-default") {
+        momentLocale = localeOverride;
+    }
+    else if (systemLang.startsWith(obsidianLang)) {
         momentLocale = systemLang;
     }
     const currentLocale = window.moment.locale(momentLocale);
@@ -779,6 +783,7 @@ const SettingsInstance = writable({
     weeklyNoteFormat: "",
     weeklyNoteTemplate: "",
     weeklyNoteFolder: "",
+    localeOverride: "system-default",
 });
 function syncMomentLocaleWithSettings(settings) {
     const { moment } = window;
@@ -832,6 +837,10 @@ class CalendarSettingsTab extends obsidian.PluginSettingTab {
                 text: "The calendar is best used in conjunction with the Daily Notes plugin. Enable it in your plugin settings for a more optimal experience.",
             });
         }
+        this.containerEl.createEl("h3", {
+            text: "Advanced Settings",
+        });
+        this.addLocaleOverrideSetting();
     }
     addDotThresholdSetting() {
         new obsidian.Setting(this.containerEl)
@@ -918,6 +927,24 @@ class CalendarSettingsTab extends obsidian.PluginSettingTab {
             textfield.setValue(this.plugin.options.weeklyNoteFolder);
             textfield.onChange(async (value) => {
                 this.plugin.writeOptions((old) => (old.weeklyNoteFolder = value));
+            });
+        });
+    }
+    addLocaleOverrideSetting() {
+        var _a;
+        const { moment } = window;
+        const sysLocale = (_a = navigator.language) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+        new obsidian.Setting(this.containerEl)
+            .setName("Override locale:")
+            .setDesc("Set this if you want to use a locale different from the default")
+            .addDropdown((dropdown) => {
+            dropdown.addOption("system-default", `Same as system (${sysLocale})`);
+            moment.locales().forEach((locale) => {
+                dropdown.addOption(locale, locale);
+            });
+            dropdown.setValue(this.plugin.options.localeOverride);
+            dropdown.onChange(async (value) => {
+                this.plugin.writeOptions((old) => (old.localeOverride = value));
             });
         });
     }
@@ -2816,9 +2843,9 @@ class CalendarPlugin extends obsidian.Plugin {
             .forEach((leaf) => leaf.detach());
     }
     async onload() {
-        configureMomentLocale();
         this.register(SettingsInstance.subscribe((value) => {
             this.options = value;
+            configureMomentLocale(this.options);
         }));
         this.registerView(VIEW_TYPE_CALENDAR, (leaf) => (this.view = new CalendarView(leaf, this.options)));
         this.addCommand({
