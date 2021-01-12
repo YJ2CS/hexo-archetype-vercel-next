@@ -48,9 +48,246 @@ async function configureMomentLocale(settings) {
     console.info(`Calendar initialization: Trying to switch Moment.js global locale to ${momentLocale}, got ${currentLocale}`);
 }
 
-const DEFAULT_WEEK_FORMAT = "YYYY-[W]ww";
+const DEFAULT_WEEK_FORMAT = "gggg-[W]ww";
 const DEFAULT_WORDS_PER_DOT = 250;
 const VIEW_TYPE_CALENDAR = "calendar";
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
+var DailyNotesFolderMissingError = /** @class */ (function (_super) {
+    __extends(DailyNotesFolderMissingError, _super);
+    function DailyNotesFolderMissingError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return DailyNotesFolderMissingError;
+}(Error));
+function getNotePath(directory, filename) {
+    if (!filename.endsWith(".md")) {
+        filename += ".md";
+    }
+    return obsidian__default['default'].normalizePath(path__default['default'].join(directory, filename));
+}
+/**
+ * Read the user settings for the `daily-notes` plugin
+ * to keep behavior of creating a new note in-sync.
+ */
+function getDailyNoteSettings() {
+    var _a, _b;
+    try {
+        // XXX: Access private API for internal plugins
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        var settings = window.app.internalPlugins.plugins["daily-notes"]
+            .instance.options;
+        return {
+            format: settings.format || DEFAULT_DATE_FORMAT,
+            folder: ((_a = settings.folder) === null || _a === void 0 ? void 0 : _a.trim()) || "",
+            template: ((_b = settings.template) === null || _b === void 0 ? void 0 : _b.trim()) || "",
+        };
+    }
+    catch (err) {
+        console.info("No custom daily note settings found!", err);
+    }
+}
+function appHasDailyNotesPluginLoaded() {
+    var app = window.app;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    var dailyNotesPlugin = app.internalPlugins.plugins["daily-notes"];
+    return dailyNotesPlugin && dailyNotesPlugin.enabled;
+}
+function getTemplateContents(template) {
+    return __awaiter(this, void 0, void 0, function () {
+        var app, metadataCache, vault, templatePath, templateFile, contents, err_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    app = window.app;
+                    metadataCache = app.metadataCache, vault = app.vault;
+                    templatePath = obsidian__default['default'].normalizePath(template);
+                    if (templatePath === "/") {
+                        return [2 /*return*/, Promise.resolve("")];
+                    }
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    templateFile = metadataCache.getFirstLinkpathDest(templatePath, "");
+                    return [4 /*yield*/, vault.cachedRead(templateFile)];
+                case 2:
+                    contents = _a.sent();
+                    return [2 /*return*/, contents];
+                case 3:
+                    err_1 = _a.sent();
+                    console.error("Failed to read the daily note template '" + templatePath + "'", err_1);
+                    new obsidian__default['default'].Notice("Failed to read the daily note template");
+                    return [2 /*return*/, ""];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+/**
+ * This function mimics the behavior of the daily-notes plugin
+ * so it will replace {{date}}, {{title}}, and {{time}} with the
+ * formatted timestamp.
+ *
+ * Note: it has an added bonus that it's not 'today' specific.
+ */
+function createDailyNote(date) {
+    return __awaiter(this, void 0, void 0, function () {
+        var app, vault, moment, _a, template, format, folder, templateContents, filename, normalizedPath, createdFile, err_2;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    app = window.app;
+                    vault = app.vault;
+                    moment = window.moment;
+                    _a = getDailyNoteSettings(), template = _a.template, format = _a.format, folder = _a.folder;
+                    return [4 /*yield*/, getTemplateContents(template)];
+                case 1:
+                    templateContents = _b.sent();
+                    filename = date.format(format);
+                    normalizedPath = getNotePath(folder, filename);
+                    _b.label = 2;
+                case 2:
+                    _b.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, vault.create(normalizedPath, templateContents
+                            .replace(/{{\s*(date|time)\s*:(.*?)}}/gi, function (_, _timeOrDate, momentFormat) {
+                            return date.format(momentFormat.trim());
+                        })
+                            .replace(/{{\s*date\s*}}/gi, filename)
+                            .replace(/{{\s*time\s*}}/gi, moment().format("HH:mm"))
+                            .replace(/{{\s*title\s*}}/gi, filename))];
+                case 3:
+                    createdFile = _b.sent();
+                    return [2 /*return*/, createdFile];
+                case 4:
+                    err_2 = _b.sent();
+                    console.error("Failed to create file: '" + normalizedPath + "'", err_2);
+                    new obsidian__default['default'].Notice("Unable to create new file.");
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
+            }
+        });
+    });
+}
+function getDailyNote(date, dailyNotes) {
+    /**
+     * Look for an exact match filename first, if one doesn't
+     * exist, walk through all the daily notes and find any files
+     * on the same day.
+     */
+    var vault = window.app.vault;
+    var _a = getDailyNoteSettings(), format = _a.format, folder = _a.folder;
+    var formattedDate = date.format(format);
+    var dailyNotePath = getNotePath(folder, formattedDate);
+    var exactMatch = vault.getAbstractFileByPath(dailyNotePath);
+    if (exactMatch) {
+        return exactMatch;
+    }
+    for (var _i = 0, dailyNotes_1 = dailyNotes; _i < dailyNotes_1.length; _i++) {
+        var dailyNote = dailyNotes_1[_i];
+        if (dailyNote.date.isSame(date, "day")) {
+            return dailyNote.file;
+        }
+    }
+    return null;
+}
+function getAllDailyNotes() {
+    /**
+     * Find all daily notes in the daily note folder
+     */
+    var moment = window.moment;
+    var vault = window.app.vault;
+    var _a = getDailyNoteSettings(), format = _a.format, folder = _a.folder;
+    var dailyNotesFolder = vault.getAbstractFileByPath(obsidian__default['default'].normalizePath(folder));
+    if (!dailyNotesFolder) {
+        throw new DailyNotesFolderMissingError("Failed to find daily notes folder");
+    }
+    var dailyNotes = [];
+    obsidian__default['default'].Vault.recurseChildren(dailyNotesFolder, function (note) {
+        if (note instanceof obsidian__default['default'].TFile) {
+            var noteDate = moment(note.basename, format, true);
+            if (noteDate.isValid()) {
+                dailyNotes.push({
+                    date: noteDate,
+                    file: note,
+                });
+            }
+        }
+    });
+    return dailyNotes;
+}
+var appHasDailyNotesPluginLoaded_1 = appHasDailyNotesPluginLoaded;
+var createDailyNote_1 = createDailyNote;
+var getAllDailyNotes_1 = getAllDailyNotes;
+var getDailyNote_1 = getDailyNote;
+var getDailyNoteSettings_1 = getDailyNoteSettings;
+var getTemplateContents_1 = getTemplateContents;
 
 function noop() { }
 function assign(tar, src) {
@@ -529,243 +766,6 @@ function writable(value, start = noop) {
     return { set, update, subscribe };
 }
 
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-
-function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-}
-
-var DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
-var DailyNotesFolderMissingError = /** @class */ (function (_super) {
-    __extends(DailyNotesFolderMissingError, _super);
-    function DailyNotesFolderMissingError() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return DailyNotesFolderMissingError;
-}(Error));
-function getNotePath(directory, filename) {
-    if (!filename.endsWith(".md")) {
-        filename += ".md";
-    }
-    return obsidian__default['default'].normalizePath(path__default['default'].join(directory, filename));
-}
-/**
- * Read the user settings for the `daily-notes` plugin
- * to keep behavior of creating a new note in-sync.
- */
-function getDailyNoteSettings() {
-    var _a, _b;
-    try {
-        // XXX: Access private API for internal plugins
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        var settings = window.app.internalPlugins.plugins["daily-notes"]
-            .instance.options;
-        return {
-            format: settings.format || DEFAULT_DATE_FORMAT,
-            folder: ((_a = settings.folder) === null || _a === void 0 ? void 0 : _a.trim()) || "",
-            template: ((_b = settings.template) === null || _b === void 0 ? void 0 : _b.trim()) || "",
-        };
-    }
-    catch (err) {
-        console.info("No custom daily note settings found!", err);
-    }
-}
-function appHasDailyNotesPluginLoaded() {
-    var app = window.app;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    var dailyNotesPlugin = app.internalPlugins.plugins["daily-notes"];
-    return dailyNotesPlugin && dailyNotesPlugin.enabled;
-}
-function getTemplateContents(template) {
-    return __awaiter(this, void 0, void 0, function () {
-        var app, metadataCache, vault, templatePath, templateFile, contents, err_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    app = window.app;
-                    metadataCache = app.metadataCache, vault = app.vault;
-                    templatePath = obsidian__default['default'].normalizePath(template);
-                    if (templatePath === "/") {
-                        return [2 /*return*/, Promise.resolve("")];
-                    }
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    templateFile = metadataCache.getFirstLinkpathDest(templatePath, "");
-                    return [4 /*yield*/, vault.cachedRead(templateFile)];
-                case 2:
-                    contents = _a.sent();
-                    return [2 /*return*/, contents];
-                case 3:
-                    err_1 = _a.sent();
-                    console.error("Failed to read the daily note template '" + templatePath + "'", err_1);
-                    new obsidian__default['default'].Notice("Failed to read the daily note template");
-                    return [2 /*return*/, ""];
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-}
-/**
- * This function mimics the behavior of the daily-notes plugin
- * so it will replace {{date}}, {{title}}, and {{time}} with the
- * formatted timestamp.
- *
- * Note: it has an added bonus that it's not 'today' specific.
- */
-function createDailyNote(date) {
-    return __awaiter(this, void 0, void 0, function () {
-        var app, vault, moment, _a, template, format, folder, templateContents, filename, normalizedPath, createdFile, err_2;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    app = window.app;
-                    vault = app.vault;
-                    moment = window.moment;
-                    _a = getDailyNoteSettings(), template = _a.template, format = _a.format, folder = _a.folder;
-                    return [4 /*yield*/, getTemplateContents(template)];
-                case 1:
-                    templateContents = _b.sent();
-                    filename = date.format(format);
-                    normalizedPath = getNotePath(folder, filename);
-                    _b.label = 2;
-                case 2:
-                    _b.trys.push([2, 4, , 5]);
-                    return [4 /*yield*/, vault.create(normalizedPath, templateContents
-                            .replace(/{{\s*(date|time)\s*:(.*?)}}/gi, function (_, _timeOrDate, momentFormat) {
-                            return date.format(momentFormat.trim());
-                        })
-                            .replace(/{{\s*date\s*}}/gi, filename)
-                            .replace(/{{\s*time\s*}}/gi, moment().format("HH:mm"))
-                            .replace(/{{\s*title\s*}}/gi, filename))];
-                case 3:
-                    createdFile = _b.sent();
-                    return [2 /*return*/, createdFile];
-                case 4:
-                    err_2 = _b.sent();
-                    console.error("Failed to create file: '" + normalizedPath + "'", err_2);
-                    new obsidian__default['default'].Notice("Unable to create new file.");
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
-            }
-        });
-    });
-}
-function getDailyNote(date, dailyNotes) {
-    /**
-     * Look for an exact match filename first, if one doesn't
-     * exist, walk through all the daily notes and find any files
-     * on the same day.
-     */
-    var vault = window.app.vault;
-    var _a = getDailyNoteSettings(), format = _a.format, folder = _a.folder;
-    var formattedDate = date.format(format);
-    var dailyNotePath = getNotePath(folder, formattedDate);
-    var exactMatch = vault.getAbstractFileByPath(dailyNotePath);
-    if (exactMatch) {
-        return exactMatch;
-    }
-    for (var _i = 0, dailyNotes_1 = dailyNotes; _i < dailyNotes_1.length; _i++) {
-        var dailyNote = dailyNotes_1[_i];
-        if (dailyNote.date.isSame(date, "day")) {
-            return dailyNote.file;
-        }
-    }
-    return null;
-}
-function getAllDailyNotes() {
-    /**
-     * Find all daily notes in the daily note folder
-     */
-    var moment = window.moment;
-    var vault = window.app.vault;
-    var _a = getDailyNoteSettings(), format = _a.format, folder = _a.folder;
-    var dailyNotesFolder = vault.getAbstractFileByPath(obsidian__default['default'].normalizePath(folder));
-    if (!dailyNotesFolder) {
-        throw new DailyNotesFolderMissingError("Failed to find daily notes folder");
-    }
-    var dailyNotes = [];
-    obsidian__default['default'].Vault.recurseChildren(dailyNotesFolder, function (note) {
-        if (note instanceof obsidian__default['default'].TFile) {
-            var noteDate = moment(note.basename, format, true);
-            if (noteDate.isValid()) {
-                dailyNotes.push({
-                    date: noteDate,
-                    file: note,
-                });
-            }
-        }
-    });
-    return dailyNotes;
-}
-var appHasDailyNotesPluginLoaded_1 = appHasDailyNotesPluginLoaded;
-var createDailyNote_1 = createDailyNote;
-var getAllDailyNotes_1 = getAllDailyNotes;
-var getDailyNote_1 = getDailyNote;
-var getDailyNoteSettings_1 = getDailyNoteSettings;
-var getTemplateContents_1 = getTemplateContents;
-
 function getWeeklyNoteSettings(settings) {
     return {
         format: settings.weeklyNoteFormat || DEFAULT_WEEK_FORMAT,
@@ -974,34 +974,6 @@ function createConfirmationDialog({ cta, onAccept, text, title, }) {
     new ConfirmationModal(window.app, { cta, onAccept, text, title }).open();
 }
 
-/**
- * Create a Daily Note for a given date.
- */
-async function tryToCreateDailyNote(date, inNewSplit, settings, cb) {
-    const { workspace } = window.app;
-    const { format } = getDailyNoteSettings_1();
-    const filename = date.format(format);
-    const createFile = async () => {
-        const dailyNote = await createDailyNote_1(date);
-        const leaf = inNewSplit
-            ? workspace.splitActiveLeaf()
-            : workspace.getUnpinnedLeaf();
-        await leaf.openFile(dailyNote);
-        cb === null || cb === void 0 ? void 0 : cb(dailyNote);
-    };
-    if (settings.shouldConfirmBeforeCreate) {
-        createConfirmationDialog({
-            cta: "Create",
-            onAccept: createFile,
-            text: `File ${filename} does not exist. Would you like to create it?`,
-            title: "New Daily Note",
-        });
-    }
-    else {
-        await createFile();
-    }
-}
-
 function getNotePath$1(directory, filename) {
     if (!filename.endsWith(".md")) {
         filename += ".md";
@@ -1057,10 +1029,8 @@ async function createWeeklyNote(date, settings) {
 function getWeeklyNote(date, settings) {
     const { vault } = window.app;
     const { format, folder } = getWeeklyNoteSettings(settings);
-    // Important: Use end of week in case week overlaps 2 years
-    // YYYY should use the NEW year.
-    const endOfWeek = date.clone().endOf("week");
-    const baseFilename = endOfWeek.format(format);
+    const startOfWeek = date.clone().startOf("week");
+    const baseFilename = startOfWeek.format(format);
     const fullPath = getNotePath$1(folder, baseFilename);
     return vault.getAbstractFileByPath(fullPath);
 }
@@ -1073,6 +1043,34 @@ async function tryToCreateWeeklyNote(date, inNewSplit, settings, cb) {
     const filename = date.format(format);
     const createFile = async () => {
         const dailyNote = await createWeeklyNote(date, settings);
+        const leaf = inNewSplit
+            ? workspace.splitActiveLeaf()
+            : workspace.getUnpinnedLeaf();
+        await leaf.openFile(dailyNote);
+        cb === null || cb === void 0 ? void 0 : cb(dailyNote);
+    };
+    if (settings.shouldConfirmBeforeCreate) {
+        createConfirmationDialog({
+            cta: "Create",
+            onAccept: createFile,
+            text: `File ${filename} does not exist. Would you like to create it?`,
+            title: "New Daily Note",
+        });
+    }
+    else {
+        await createFile();
+    }
+}
+
+/**
+ * Create a Daily Note for a given date.
+ */
+async function tryToCreateDailyNote(date, inNewSplit, settings, cb) {
+    const { workspace } = window.app;
+    const { format } = getDailyNoteSettings_1();
+    const filename = date.format(format);
+    const createFile = async () => {
+        const dailyNote = await createDailyNote_1(date);
         const leaf = inNewSplit
             ? workspace.splitActiveLeaf()
             : workspace.getUnpinnedLeaf();
@@ -2797,14 +2795,12 @@ class CalendarView extends obsidian.ItemView {
     }
     async openOrCreateWeeklyNote(date, existingFile, inNewSplit) {
         const { workspace } = this.app;
-        // Important: Use end of week in case week overlaps 2 years
-        // YYYY should use the NEW year.
-        const endOfWeek = date.clone().endOf("week");
+        const startOfWeek = date.clone().startOf("week");
         const { format } = getWeeklyNoteSettings(this.settings);
-        const baseFilename = endOfWeek.format(format);
+        const baseFilename = startOfWeek.format(format);
         if (!existingFile) {
             // File doesn't exist
-            tryToCreateWeeklyNote(endOfWeek, inNewSplit, this.settings, () => {
+            tryToCreateWeeklyNote(startOfWeek, inNewSplit, this.settings, () => {
                 this.calendar.$set({ activeFile: baseFilename });
             });
             return;
@@ -2861,7 +2857,11 @@ class CalendarPlugin extends obsidian.Plugin {
         this.addCommand({
             id: "open-weekly-note",
             name: "Open Weekly Note",
-            callback: () => this.view.openOrCreateWeeklyNote(window.moment(), null, false),
+            callback: () => {
+                const date = window.moment();
+                const existingFile = getWeeklyNote(date, this.options);
+                this.view.openOrCreateWeeklyNote(date, existingFile, false);
+            },
         });
         this.addCommand({
             id: "reload-calendar-view",

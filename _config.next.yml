@@ -513,7 +513,7 @@ font:
 # ---------------------------------------------------------------
 
 # Disable Baidu transformation on mobile devices.
-disable_baidu_transformation: false
+# disable_baidu_transformation: false
 
 # If true, site-subtitle will be added to index page.
 # Remember to set up your site-subtitle in Hexo `_config.yml` (e.g. subtitle: Subtitle)
@@ -539,7 +539,7 @@ yandex_site_verification:
 baidu_site_verification: code-52p1M7BOQx
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO.
-baidu_push: true
+# baidu_push: true
 
 
 # ---------------------------------------------------------------
@@ -736,8 +736,11 @@ baidu_analytics: # <app_id>
 # Growingio Analytics
 growingio_analytics: # <project_id>
 
+# Cloudflare Web Analytics
+cloudflare_analytics:
+
 # CNZZ count
-cnzz_siteid:
+# cnzz_siteid:
 
 # Show number of visitors of each article.
 # You can visit https://www.leancloud.cn to get AppID and AppKey.
@@ -802,7 +805,7 @@ local_search: #设置为true
   preload: false
 
 # Swiftype Search API Key
-swiftype_key:
+# swiftype_key:
 
 
 # ---------------------------------------------------------------

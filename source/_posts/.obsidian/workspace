@@ -1,15 +1,15 @@
 {
   "main": {
-    "id": "d9b569a31cb37a45",
+    "id": "20190b691e1fdf15",
     "type": "split",
     "children": [
       {
-        "id": "1c28628349d02d4b",
+        "id": "5aeef87d5019f5b3",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "_drafts/Untitled.md",
+            "file": "站点内容推荐.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -19,12 +19,12 @@
         }
       },
       {
-        "id": "22e36bea85ff304d",
+        "id": "525d24e4c31e770e",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "_drafts/Untitled.md",
+            "file": "站点内容推荐.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -34,13 +34,13 @@
         }
       },
       {
-        "id": "d9fee11d58747dcf",
+        "id": "f8a7b2932637e5c0",
         "type": "leaf",
         "active": true,
         "state": {
           "type": "markdown",
           "state": {
-            "file": "_drafts/Untitled.md",
+            "file": "站点内容推荐.md",
             "mode": "source"
           }
         }
@@ -49,15 +49,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "5449c06af320cad5",
+    "id": "1b6d04daf661e68c",
     "type": "split",
     "children": [
       {
-        "id": "9b22c3048002fb70",
+        "id": "bf0fa5db829844d3",
         "type": "tabs",
         "children": [
           {
-            "id": "a3f60cebc480ef5b",
+            "id": "e54ad742196d028d",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -65,22 +65,22 @@
             }
           },
           {
-            "id": "1aada9d95e67682a",
+            "id": "4db207ad3e0f0ed4",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "cpp和opencv-运行环境",
+                "query": "alias",
                 "matchingCase": false,
                 "explainSearch": false,
-                "collapseAll": true,
-                "extraContext": true,
+                "collapseAll": false,
+                "extraContext": false,
                 "sortOrder": "alphabetical"
               }
             }
           },
           {
-            "id": "930178afdb41b469",
+            "id": "53818b3952261c86",
             "type": "leaf",
             "state": {
               "type": "starred",
@@ -91,61 +91,61 @@
       }
     ],
     "direction": "horizontal",
-    "width": 265
+    "width": 300
   },
   "right": {
-    "id": "b90ac130dbc59c75",
+    "id": "d5d151aed2619123",
     "type": "split",
     "children": [
       {
-        "id": "683247c5404899d7",
+        "id": "a80ed8bff02f0208",
         "type": "tabs",
         "children": [
           {
-            "id": "f963868fef23cb4b",
+            "id": "d518237321273f8a",
             "type": "leaf",
             "state": {
-              "type": "outline",
+              "type": "backlink",
               "state": {
-                "file": "_drafts/Untitled.md"
+                "file": "站点内容推荐.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "c5d98225ce5c81b2",
+            "id": "09959dfbbb74940b",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
-                "sortOrder": "frequency"
+                "sortOrder": "frequency",
+                "useHierarchy": true
               }
             }
           },
           {
-            "id": "d7466c868367e8e5",
+            "id": "ba3421418ffd9583",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "站点内容推荐.md"
+              }
+            }
+          },
+          {
+            "id": "a0c85365ba5383b5",
             "type": "leaf",
             "state": {
               "type": "calendar",
               "state": {}
             }
-          },
-          {
-            "id": "287bfc7a74c9ee65",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "_drafts/Untitled.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": false
-              }
-            }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -153,15 +153,15 @@
     "collapsed": true
   },
   "lastOpenFiles": [
-    "_drafts/Untitled.md",
-    "分享免费下载论文的网站.md",
-    "10分钟重新认识git.md",
-    "_drafts/7-4-Spring-4.md",
-    "_drafts/win10环境下-mingw-w64-cmake-clion-安装及配置-cpp-和-opencv-运行环境.md",
-    "cpp和opencv-运行环境.md",
-    "安装cpp相关开发环境.md",
-    "eclipse调整字体大小.md",
-    "coding中找不到pages服务.md",
-    "重装windows.md"
+    "站点内容推荐.md",
+    "工具推荐.md",
+    "个人博客搭建配置全过程.md",
+    "开发环境配置全过程.md",
+    "算法和数据结构.md",
+    "效率提升.md",
+    "记录windows上nodejs版本管理器nvm安装配置.md",
+    "windows-hexo博客环境初始化.md",
+    "hexo搭建博客记录.md",
+    "nodeenv-readme.md"
   ]
 }

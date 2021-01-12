@@ -12,8 +12,8 @@ categories:
 tags:
   - 悦读
 no-photos: 'https://random.52ecy.cn/randbg.php?size=1&rid-{{tp_title}}'
-date: {{tp_today}} {{tp_time:f=HH:mm:ss}}
-date updated: {{tp_today}} {{tp_time:f=HH:mm:ss}}
+date: '{{tp_today:f=YYYY-MM-DDT}}{{tp_time:f=HH:mm:ssZ}}'
+date updated: '{{tp_today:f=YYYY-MM-DDT}}{{tp_time:f=HH:mm:ssZ}}'
 
 ---
 
