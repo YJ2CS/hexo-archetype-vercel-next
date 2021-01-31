@@ -27,7 +27,7 @@ root: /
 # ':year/:month/:day/:title/' | ':abbrlink' | ':url/' | <another link>
 # 不带后缀名会导致有的web server(比如常见的GitHub pages)发送错误的MIME类型，浏览器接收到非HTML的MIME，会默认进行下载
 # 所以，请带一个`/`后缀，或者以.html为后缀，即必须需要有后缀
-permalink: ':url/'
+permalink: ':url/index.html'
 permalink_defaults:
   langu: cn # :langu -> cn (replace),
   #then you can write like this: permalink: :langu/:title/
@@ -48,7 +48,8 @@ pretty_urls:
 #   rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
 
 # Directory
-source_dir: source
+# source_dir: source
+source_dir: la-blog-source
 public_dir: public
 tag_dir: tags # 标签
 archive_dir: archives # 归档
@@ -58,6 +59,7 @@ i18n_dir: :lang
 skip_render:
   - README.md
   - "_posts/Find unlinked files plugin output.md"
+  - "Find unlinked files plugin output.md"
 
 # Writing
 # see https://hexo.io/zh-cn/docs/configuration.html
@@ -75,7 +77,7 @@ filename_case: 1
 # 对草稿提供渲染 render_drafts	显示草稿
 render_drafts: false
 # 图片文件夹
-post_asset_folder: false
+post_asset_folder: true
 # 注意：relative_link是 Jekyll 和 GitHub 都建议关闭的功能
 # 默认情况下，Hexo 生成的超链接都是绝对地址。
 # 例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，
@@ -88,8 +90,8 @@ future: true
 
 # 代码高亮
 highlight:
-  enable: true #next->true
-  # enable: false # highlight有安全风险，换成prismjs
+  # enable: true #next->true
+  enable: false # highlight有安全风险，换成prismjs
   line_number: true
   # 自动检测
   auto_detect: false

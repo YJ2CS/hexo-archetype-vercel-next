@@ -1,1 +1,0 @@
-{"command_timeout":5,"template_folder":"_template","templates_pairs":[["{{weather}}","powershell ((Invoke-WebRequest -UseBasicParsing -Uri wttr.in/Paris?format=3).Content)"],["",""]],"locale":"zh-cn","overload_daily_notes":true}
