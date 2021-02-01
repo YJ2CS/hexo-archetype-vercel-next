@@ -433,3 +433,7 @@ db.json
 _admin-config.yml
 #/source/_posts/_云笔记/
 #/source/_posts/_私密信息/
+
+# add 配置文件夹
+!.vscode/
+!.obsidian/
