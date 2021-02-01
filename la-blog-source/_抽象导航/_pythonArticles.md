@@ -1,6 +1,6 @@
 ---
 title: pythonArticles
-url: pythonArticles
+siteurl: pythonArticles
 author: YJ2CS
 avatar: '/custom/avatar.webp'
 authorLink: YJ2CS.github.io

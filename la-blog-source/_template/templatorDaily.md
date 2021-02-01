@@ -1,6 +1,6 @@
 ---
 title: {{tp_title}}
-url: {{tp_title}}
+siteurl: {{tp_title}}
 author: YJ2CS
 avatar: '/custom/avatar.webp'
 authorLink: YJ2CS.github.io

@@ -1,6 +1,6 @@
 ---
 title: CorCppArticles
-url: CorCppArticles
+siteurl: CorCppArticles
 author: YJ2CS
 avatar: '/custom/avatar.webp'
 authorLink: YJ2CS.github.io

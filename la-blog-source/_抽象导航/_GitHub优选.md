@@ -1,6 +1,6 @@
 ---
 title: _GitHub优选
-url: _GitHub优选
+siteurl: _GitHub优选
 author: YJ2CS
 avatar: '/custom/avatar.webp'
 authorLink: YJ2CS.github.io

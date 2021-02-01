@@ -1,6 +1,6 @@
 ---
 title: _terminal
-url: _terminal
+siteurl: _terminal
 author: YJ2CS
 avatar: /custom/avatar.webp
 authorLink: YJ2CS.github.io

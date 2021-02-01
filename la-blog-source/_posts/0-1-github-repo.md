@@ -1,6 +1,6 @@
 ---
 title: 学习仓库推荐
-url: 0-1-github-repo
+siteurl: 0-1-github-repo
 alias: 
   - learn_repo/index.html
   - learn-repo/index.html
