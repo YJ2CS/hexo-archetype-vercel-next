@@ -33,6 +33,7 @@
     "live2d-widget-model-koharu": "^1.0.5",
     "live2d-widget-model-wanko": "^1.0.5",
     "markdown-it-emoji": "^2.0.0",
+    "prism-themes": "^1.5.0",
     "request": "^2.88.2",
     "shelljs": "^0.8.4",
     "xml-parser": "^1.2.1",

@@ -411,8 +411,8 @@ codeblock:
     light: default
     dark: tomorrow-night
   prism:
-    light: prism
-    dark: prism-dark
+    light: prism-material-light
+    dark: prism-material-oceanic
   # Add copy button on codeblock
   copy_button:
     #是否添加复制按钮
