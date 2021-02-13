@@ -32,6 +32,4 @@ template: |
 
   ## Previous
 
-  if you want to back to previous version, you can click this:
-
-  [Previous version：$PREVIOUS_TAG](https://github.com/YJ2CS/lamirs-hexo-blog/releases/tag/$PREVIOUS_TAG)
+  $PREVIOUS_TAG
