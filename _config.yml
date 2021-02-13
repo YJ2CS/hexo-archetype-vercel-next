@@ -48,8 +48,8 @@ pretty_urls:
 #   rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
 
 # Directory
-source_dir: source
-# source_dir: la-blog-source
+# source_dir: source
+source_dir: la-blog-source
 public_dir: public
 tag_dir: tags # 标签
 archive_dir: archives # 归档
@@ -101,7 +101,7 @@ highlight:
 
 prismjs:
   enable: true
-  preprocess: false
+  preprocess: true
   line_number: true
   tab_replace: ''
 
