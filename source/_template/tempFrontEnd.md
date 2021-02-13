@@ -19,6 +19,8 @@ date updated: '{{tp_last_modif_date:f=YYYY-MM-DD}} {{tp_time:f=HH:mm:ss}}'
 
 {{tp_daily_quote}}
 
--  总目录: [[_日记]]
+>本系列关注前端部分,根据学习路线图达到学习Vue.js的目的
+>
+>developer路线图[developer-roadmap/translations/chinese at master · kamranahmedse/developer-roadmap - https://github.com/](https://github.com/kamranahmedse/developer-roadmap/tree/master/translations/chinese)
 
 {{tp_cursor}}

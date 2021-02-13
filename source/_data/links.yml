@@ -1,0 +1,8 @@
+- name: 青果先生  #友链名称
+  avatar: https://wugenqiang.github.io/images/fighting_wugenqiang.jpg  #友链头像
+  site: https://wugenqiang.github.io  #友链地址
+  info: Sometimes your whole life boils down to one insame move.  #友链说明
+- name: CalmCenter  #友链名称
+  avatar: https://wugenqiang.github.io/PictureBed/pictures/20190523-05.jpg  #友链头像
+  site: https://calmcenter.github.io/  #友链地址
+  info: 就是干！  #友链说明

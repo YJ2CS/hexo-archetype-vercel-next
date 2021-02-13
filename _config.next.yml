@@ -28,8 +28,7 @@ custom_file_path:
   #bodyEnd: source/_data/body-end.njk
   #variable: source/_data/variables.styl
   #mixin: source/_data/mixins.styl
-  #style: source/_data/styles.styl
-
+  style: source/_data/styles.styl
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -85,19 +84,23 @@ creative_commons:
 # External url should start with http:// or https://
 menu: #目录 #首页 fa-home 字体漂亮图标 下同
   home: / || fa fa-home
+  # 基石内容
+  快速导航: /readme/ || fas fa-university
   about: /about/ || fa fa-user
   tags: /tags/ || fa fa-tags
   categories: /categories/ || fa fa-th
   archives: /archives/ || fa fa-archive
+  # 学习资源
+  # 学习资源: /learning-resources/ || fas fa-paperclip
+  #友链
+  友人帐: /links/ || fa fa-link
+  # 留言板
+  # 留言板: /msgboard/ || far fa-comments
+  # 赞助商,捐赠
+  # 赞助者: /sponsor/ || fas fa-donate
   #schedule: /schedule/ || fa fa-calendar
   #sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
-  #友链
-  友链: /links/ || fa fa-link
-  #书籍
-  # book: https://wugenqiang.gitee.io/ibooks/ || book
-  #工具Box
-  工具箱: /laboratory/toolBox/ || fa fa-toolbox
 
 # Enable / Disable menu icons / item badges.
 #目录设置，如果设置icon: false则无图标，badges: true则标签都会显示数字
@@ -166,13 +169,12 @@ social:
   #Skype: skype:yourname?call|chat || fab fa-skype
 
   gitee:  https://gitee.com/yj2cs || fab fa-github-alt
-  github:  http://github.com/yj2cs || fab fa-github
-  csdn:  https://blog.csdn.net/yj2cs || fab fa-cuttlefish
-  zhihu: https://www.zhihu.com/people/yj2cs || fab fa-zhihu
-  #jianshu: {url: /https://www.jianshu.com/u/9b726a534140, img: /img/social/jianshu.png}
-  # sina: {url: http://weibo.com/3829198906/info, img: /img/social/sina.png}
+  github: https://github.com/yj2cs || fab fa-github
+  csdn: https://blog.csdn.net/qq_43341906 || fab fa-cuttlefish
+  zhihu: https://www.zhihu.com/people/lamirs || fab fa-zhihu
+  sina: https://weibo.com/7494064890/ || fab fa-weibo
   bilibili: https://space.bilibili.com/5323885 || fas fa-bold
-  #wangyiyun: {url: https://music.163.com/#/user/home?id=337394988, img: /img/social/wangyiyun.png}
+  wangyiyun: https://music.163.com/#/user/home?id=85515176 || fas fa-music
   E-Mail: mailto:cnyjzhang@outlook.com || fa fa-envelope
 
 social_icons: #设置图标是否显示
