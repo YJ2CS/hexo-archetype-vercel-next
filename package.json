@@ -9,7 +9,6 @@
     "@gerhobbelt/markdown-it-wikilinks": "^1.1.1-7",
     "cheerio": "^1.0.0-rc.5",
     "hexo": "^5.3.0",
-    "hexo-deployer-git": "^2.1.0",
     "hexo-excerpt": "^1.1.6",
     "hexo-generator-alias": "^1.0.0",
     "hexo-generator-archive": "^1.0.0",

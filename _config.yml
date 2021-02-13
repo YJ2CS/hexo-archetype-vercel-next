@@ -182,15 +182,16 @@ theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  #repository: https://github.com/wugenqiang/wugenqiang.github.io.git #复制过来
-  # github: https://github.com/yj2cs/yj2cs.github.io.git,master
-  #branch: master
-  repo:
-    github: https://github.com/YJ2CS/yj2cs.github.io.git,master
-    # coding: https://e.coding.net/yj2cs/o/yj2cs.coding.me.git,master
-    # gitee: https://gitee.com/wugenqiang/wugenqiang.git,master
+# deploy:
+#   # see https://hexo.io/docs/one-command-deployment#content-inner
+#   type: git
+#   #repository: https://github.com/wugenqiang/wugenqiang.github.io.git #复制过来
+#   # github: https://github.com/yj2cs/yj2cs.github.io.git,master
+#   #branch: master
+#   repo:
+#     github: https://github.com/YJ2CS/yj2cs.github.io.git,master
+#     # coding: https://e.coding.net/yj2cs/o/yj2cs.coding.me.git,master
+#     # gitee: https://gitee.com/wugenqiang/wugenqiang.git,master
 
 # sitemap setting 用于搜索引擎扫描你的站点时，确定你站点的结构
 sitemap:
