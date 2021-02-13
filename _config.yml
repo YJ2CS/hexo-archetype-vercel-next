@@ -251,6 +251,23 @@ markdown:
         # [[title home]] -> [title_home](...title_home/index.html),注意后缀从默认的.html更改为 /index.html
         # uriSuffix: '/index.html'
         uriSuffix: ''
+    # - name: markdown-it-obsidian
+    #   options:
+    #     # deaault: linkPattern: /\[\[([^\x00-\x1f|]+?)(\|([\s\S]+?))?\]\]/,          // accept anything, except control characters (CR, LF, etc) or |
+    #     # linkPattern: /\[\[([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+)(\|([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+))?\]\]/
+    #     # 将所有 wiki 链接渲染为绝对链接。
+    #     # 默认： false
+    #     # 这项要根据你前面对链接的渲染设置来更改
+    #     makeAllLinksAbsolute: true
+    #     # 绝对链接的前缀
+    #     # default: /
+    #     # baseURL: 'https://lamirs.vercel.app/'
+    #     # url的后缀,
+    #     # default: .html
+    #     # [[title home]] -> [title_home](...title_home/index.html),注意后缀从默认的.html更改为 /index.html
+    #     # uriSuffix: '/index.html'
+    #     uriSuffix: ''
+
 
   anchors:
     level: 1
