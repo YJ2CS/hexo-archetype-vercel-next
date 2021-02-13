@@ -235,46 +235,48 @@ server:
 # 博客加上萌萌的宠物或萌妹子
 # Live2D
 # https://github.com/EYHN/hexo-helper-live2d
-live2d:
-  enable: true
+# live2d:
+#   enable: true
   # enable: false
-  scriptFrom: local # 默认
+  # scriptFrom: local # 默认
     # scriptFrom: jsdelivr # jsdelivr CDN
   # scriptFrom: unpkg # unpkg CDN
-  # scriptFrom: https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js # 你的自定义 url
-  pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
-  pluginJsPath: lib/ # 脚本文件相对与插件根目录路径
-  pluginModelPath: assets/ # 模型文件相对与插件根目录路径
-  tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
-  debug: false # 调试, 是否在控制台输出日志
-  model:
-    use: live2d-widget-model-koharu
+  # scriptFrom: https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js # 你的自定义 url
+  # pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
+  # pluginJsPath: lib/ # 脚本文件相对与插件根目录路径
+  # pluginModelPath: assets/ # 模型文件相对与插件根目录路径
+  # tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
+  # debug: false # 调试, 是否在控制台输出日志
+  # model:
+    # use: live2d-widget-model-koharu
     # use: live2d-widget-model-wanko # npm-module package name
     # use: wanko # 博客根目录/live2d_models/ 下的目录名
     # use: ./wives/wanko # 相对于博客根目录的路径
     # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url
-
 # -------------------------------------------------------------------
     # Live2D General Settings
     ## https://github.com/xiazeyu/live2d-widget.js
     ## https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init
-    scale: 1
-    hHeadPos: 0.5
-    vHeadPos: 0.618
-  display:
-    superSample: 2
-    width: 150
-    height: 300
-    # position: right
-    position: 'left'
-    hOffset: 0
-    vOffset: -20
-  mobile:
-    show: false
-    scale: 0.5
-  react:
-    opacityDefault: 0.7
-    opacityOnHover: 0.2
+    # scale: 1
+    # hHeadPos: 0.5
+    # vHeadPos: 0.618
+  # display:
+  #   superSample: 2
+  #   width: 75
+  #   height: 150
+  #   # position: right
+  #   position: 'left'
+  #   hOffset: 0
+  #   vOffset: -20
+  # mobile:
+  #   show: false
+  #   scale: 0.5
+  # react:
+  #   opacityDefault: 0.7
+  #   opacityOnHover: 0.2
+
+
+
 
 # 自动摘录
 # 本插件通过注册generator对所有文章在生成的时候进行处理，
