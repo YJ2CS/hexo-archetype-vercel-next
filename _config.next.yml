@@ -1025,17 +1025,6 @@ passage_end_tag:
 # 添加共享按钮
 shareto: false
 
-archive_generator:
-  ##归档页面默认20篇文章标题
-  per_page: 20
-  ##生成年视图
-  yearly: true
-  ##生成月视图
-  monthly: true
-
-tag_generator:
-  per_page: 15
-
 #daovoice: true  #daovoice
 #daovoice_app_id: b6dbddb6 #我们注册获取的id
 
