@@ -19,7 +19,7 @@ minify: true
 # Define custom file paths.
 # Create your custom files in site directory `source/_data` and uncomment needed files below.
 custom_file_path:
-  #head: source/_data/head.njk
+  head: source/_data/head.njk
   #header: source/_data/header.njk
   #sidebar: source/_data/sidebar.njk
   #postMeta: source/_data/post-meta.njk
@@ -1039,16 +1039,6 @@ tag_generator:
 #daovoice: true  #daovoice
 #daovoice_app_id: b6dbddb6 #我们注册获取的id
 
-mylinks:
-- nickname: 青果先生  #友链名称
-  avatar: https://wugenqiang.github.io/images/fighting_wugenqiang.jpg  #友链头像
-  site: https://wugenqiang.github.io  #友链地址
-  info: Sometimes your whole life boils down to one insame move.  #友链说明
-- nickname: CalmCenter  #友链名称
-  avatar: https://wugenqiang.github.io/PictureBed/pictures/20190523-05.jpg  #友链头像
-  site: https://calmcenter.github.io/  #友链地址
-  info: 就是干！  #友链说明
-
 # Hide single post
 hide:
   hide_post: false
@@ -1056,3 +1046,9 @@ hide:
 # visitors count
 counter: true
 
+# 博客加上萌萌的宠物或萌妹子
+# Live2D
+# https://github.com/stevenjoezhang/live2d-widget
+# next theme 引入js见 https://theme-next.js.org/docs/advanced-settings/custom-files.html
+live2d:
+  enable: true
