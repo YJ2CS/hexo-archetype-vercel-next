@@ -294,7 +294,7 @@ server:
 #   enable: true
   # enable: false
   # scriptFrom: local # 默认
-    # scriptFrom: jsdelivr # jsdelivr CDN
+  # scriptFrom: jsdelivr # jsdelivr CDN
   # scriptFrom: unpkg # unpkg CDN
   # scriptFrom: https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js # 你的自定义 url
   # pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
@@ -340,7 +340,7 @@ server:
 # 还可以使用 css 选择器从生成的摘录中排除某些标记。将排除与任何选择器匹配的标记。
 # 默认行为 hideWholePostExcerpts: false 是只显示摘录，如果它不会是整个职位。设置为覆盖它，并显示整个帖子摘录。
 excerpt:
-  depth: 10
+  depth: 5
   excerpt_excludes: [ ]
   more_excludes: [ ]
   hideWholePostExcerpts: true
