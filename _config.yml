@@ -194,10 +194,12 @@ theme: next
 #     # gitee: https://gitee.com/wugenqiang/wugenqiang.git,master
 
 # sitemap setting 用于搜索引擎扫描你的站点时，确定你站点的结构
+# hexo-generator-sitemap
 sitemap:
   path: sitemap.xml
-baidusitemap:
-  path: baidusitemap.xml
+# hexo-generator-baidu-sitemap
+# baidusitemap:
+#   path: baidusitemap.xml
 
 # 标签云
 #tag_cloud:
