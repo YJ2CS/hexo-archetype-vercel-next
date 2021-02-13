@@ -1,7 +1,5 @@
-- [[mb-s与mb-s一样吗]]
 - [[如何在HEXO中插入图片]]
 - [[todo]]
 - [[changelog]]
 - [[adobe版本号]]
 - [[0-1-github-repo]]
-- [[Pasted image 20210127114010.png]]
