@@ -27,7 +27,7 @@ root: /
 # ':year/:month/:day/:title/' | ':abbrlink' | ':url/' | <another link>
 # 不带后缀名会导致有的web server(比如常见的GitHub pages)发送错误的MIME类型，浏览器接收到非HTML的MIME，会默认进行下载
 # 所以，请带一个`/`后缀，或者以.html为后缀，即必须需要有后缀
-permalink: ':siteurl/'
+permalink: ':slug/'
 permalink_defaults:
   langu: cn # :langu -> cn (replace),
   #then you can write like this: permalink: :langu/:title/
