@@ -43,7 +43,6 @@ scheme: Gemini
 # Dark Mode
 darkmode: true
 
-
 # ---------------------------------------------------------------
 # Site Information Settings
 # ---------------------------------------------------------------
@@ -72,7 +71,6 @@ creative_commons:
   sidebar: false
   post: false
   language:
-
 
 # ---------------------------------------------------------------
 # Menu Settings
@@ -108,7 +106,6 @@ menu_settings:
   icons: true
   #默认是false
   badges: false
-
 
 # ---------------------------------------------------------------
 # Sidebar Settings
@@ -168,7 +165,7 @@ social:
   #Instagram: https://instagram.com/yourname || fab fa-instagram
   #Skype: skype:yourname?call|chat || fab fa-skype
 
-  gitee:  https://gitee.com/yj2cs || fab fa-github-alt
+  gitee: https://gitee.com/yj2cs || fab fa-github-alt
   github: https://github.com/yj2cs || fab fa-github
   csdn: https://blog.csdn.net/qq_43341906 || fab fa-cuttlefish
   zhihu: https://www.zhihu.com/people/lamirs || fab fa-zhihu
@@ -219,7 +216,6 @@ chat:
   icon: fa fa-comment # Icon name in Font Awesome, set false to disable icon.
   text: Chat # Button text, change it as you wish.
 
-
 # ---------------------------------------------------------------
 # Footer Settings
 # See: https://theme-next.js.org/docs/theme-settings/footer
@@ -257,7 +253,6 @@ footer:
     gongan_num:
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
     gongan_icon_url:
-
 
 # ---------------------------------------------------------------
 # Post Settings
@@ -316,10 +311,10 @@ reward:
   #alipay: /images/alipay.png
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
-#  paypal: #https://www.paypal.me/hojuncn
+  #  paypal: #https://www.paypal.me/hojuncn
   alipay: /custom/donate/AliPayQR.webp # 小图二维码
-#  alipayQR: /custom/donate/AliPayQR.jpg
-#  alipayHBQR: /custom/donate/AliPayHBQR.jpg
+  #  alipayQR: /custom/donate/AliPayQR.jpg
+  #  alipayHBQR: /custom/donate/AliPayHBQR.jpg
   wechat: /custom/donate/WeChatQR.webp # 小图二维码
 #  wechatQR: /custom/donate/WeChanQR.jpg #微信收款码
 #  wechatSQ: /custom/donate/WeChanSQ.jpg #赞赏码
@@ -357,7 +352,6 @@ post_edit:
 # Available values: left | right | false
 post_navigation: left
 
-
 # ---------------------------------------------------------------
 # Custom Page Settings
 # See: https://theme-next.js.org/docs/theme-settings/custom-pages
@@ -383,7 +377,6 @@ calendar:
   showDeleted: false
   singleEvents: true
   maxResults: 250
-
 
 # ---------------------------------------------------------------
 # Misc Theme Settings
@@ -453,7 +446,6 @@ github_banner:
   permalink: https://github.com/yj2cs
   title: Follow me on GitHub
 
-
 # ---------------------------------------------------------------
 # Font Settings
 # ---------------------------------------------------------------
@@ -508,7 +500,6 @@ font:
     external: true
     family: PT Mono
 
-
 # ---------------------------------------------------------------
 # SEO Settings
 # See: https://theme-next.js.org/docs/theme-settings/seo
@@ -542,7 +533,6 @@ baidu_site_verification: code-52p1M7BOQx
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO.
 # baidu_push: true
-
 
 # ---------------------------------------------------------------
 # Third Party Plugins & Services Settings
@@ -613,7 +603,6 @@ quicklink:
   # See: https://github.com/GoogleChromeLabs/quicklink#custom-ignore-patterns
   ignores:
 
-
 # ---------------------------------------------------------------
 # Comments Settings
 # See: https://theme-next.js.org/docs/third-party-services/comments
@@ -657,7 +646,7 @@ disqusjs:
   # api: https://disqus.skk.moe/disqus/
   api: https://disqus.skk.moe/disqus/
   # Register new application from https://disqus.com/api/applications/
-  apikey: 'lTg2gpR7KgKJq9nZxRbO41bijSoNAfJuaLkzJaPXx0yKMyS00SARsrIvvxXyLi2S'
+  apikey: "lTg2gpR7KgKJq9nZxRbO41bijSoNAfJuaLkzJaPXx0yKMyS00SARsrIvvxXyLi2S"
   # See: https://disqus.com/admin/settings/general/
   shortname: lamirs
 
@@ -667,7 +656,6 @@ changyan:
   enable: false
   appid:
   appkey:
-
 
 # LiveRe comments system
 # You can get your uid from https://livere.com/insight/myCode (General web site)
@@ -686,7 +674,7 @@ gitalk:
   # Gitalk's display language depends on user's browser or system environment
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
-  language:
+  language: zh-CN
 
 # Utterances
 # For more information: https://utteranc.es
@@ -702,7 +690,6 @@ utterances:
 # For more information: https://posativ.org/isso/
 isso: # <data_isso>
 
-
 # ---------------------------------------------------------------
 # Post Widgets & Content Sharing Services
 # See: https://theme-next.js.org/docs/third-party-services/post-widgets
@@ -712,13 +699,12 @@ isso: # <data_isso>
 # To get your ID visit https://widgetpack.com
 rating:
   enable: false
-  id:     # <app_id>
-  color:  "#fc6423"
+  id: # <app_id>
+  color: "#fc6423"
 
 # AddThis Share. See: https://www.addthis.com
 # Go to https://www.addthis.com/dashboard to customize your tools.
 add_this_id:
-
 
 # ---------------------------------------------------------------
 # Statistics and Analytics
@@ -779,7 +765,6 @@ busuanzi_count:
   post_views: true
   post_views_icon: far fa-eye
 
-
 # ---------------------------------------------------------------
 # Search Services
 # See: https://theme-next.js.org/docs/third-party-services/search-services
@@ -809,7 +794,6 @@ local_search: #设置为true
 # Swiftype Search API Key
 # swiftype_key:
 
-
 # ---------------------------------------------------------------
 # Chat Services
 # See: https://theme-next.js.org/docs/third-party-services/chat-services
@@ -830,7 +814,6 @@ chatra:
 tidio:
   enable: false
   key: # Public Key, get it from dashboard. See: https://www.tidio.com/panel/settings/developer
-
 
 # ---------------------------------------------------------------
 # Tags Settings
@@ -871,7 +854,6 @@ mermaid:
   # Available themes: default | dark | forest | neutral
   theme: forest
 
-
 # ---------------------------------------------------------------
 # Animation Settings
 # ---------------------------------------------------------------
@@ -904,7 +886,6 @@ canvas_ribbon:
   size: 300 # The width of the ribbon
   alpha: 0.6 # The transparency of the ribbon
   zIndex: -1 # The display level of the ribbon
-
 
 #! ==============================================================
 #! DO NOT EDIT THE FOLLOWING SETTINGS
