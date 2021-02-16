@@ -1,9 +1,8 @@
 ---
 title: 友链
-author: Lamirs
 type: links
 date: 2019-05-26T08:03:27.000Z
-date updated: '2021-02-08 11:05:13'
+lastmod: '2021-02-08 11:05:13'
 
 ---
 <div id="links">

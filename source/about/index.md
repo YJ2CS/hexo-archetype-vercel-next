@@ -1,22 +1,31 @@
 ---
 title: Hello，欢迎来到Lamirs ☆ Daze
-slug: about
 alias:
   - sponsor/index.html
   - msgboard/index.html
-author: YJ2CS
-avatar: /img/avatar.webp
-externalLink: https://lamirs.vercel.app/
-authorAbout: 愿青年摆脱了冷气，只是向前走！
-authorDesc: 愿青年摆脱了冷气，只是向前走！
-comments: false
-featuredImage: https://random.52ecy.cn/randbg.php?size=1&rid-2021-02-01-21-30-07
 date: '2021-02-01 21:30:07'
 lastmod: '2021-02-09 21:54:29'
 
 ---
-
-{% githubCard user:YJ2CS width:400 height:200 align:text-align_position %}
+<!-- <div style="text-align:center"> -->
+<div id="links">
+<div class="links-content">
+<div class="link-navigation">
+{% for link in site.data.followme %}
+<div class="card">
+  <a href="{{ link.site }}" target="_blank">
+  <img class="ava" src="{{ link.avatar }}"/></a>
+  <div class="card-header">
+  <div><a href="{{ link.site }}" target="_blank">{{ link.name }}</a>
+  <a href="{{ link.site }}"><span class="focus-links"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;关注</span></a></div>
+  <div class="info" title="{{ link.info }}">{{ link.info }}</div>
+  </div>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+<!-- </div> -->
 
 > 发送 Email 联系我:  <a href="mailto:cnyjzhang@outlook.com?subject=issues&body=名称：%0A%0A说明：%0A">点击发送邮件</a>
 
@@ -28,9 +37,9 @@ lastmod: '2021-02-09 21:54:29'
 
 ## 欢迎打钱！
 
-![alipayQR](/custom/donate/AliPayQR.webp)
+![alipayQR](https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/AliPayQR.webp)
 
-![wechatQR](/custom/donate/WeChatQR.webp)
+![wechatQR](https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/WeChatQR.webp)
 
 ## 留言跳转
 <b>

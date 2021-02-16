@@ -14,6 +14,82 @@ const DEFAULT_WORDS_PER_DOT = 250;
 const VIEW_TYPE_CALENDAR = "calendar";
 const TRIGGER_ON_OPEN = "calendar:open";
 
+var DEFAULT_DAILY_NOTE_FORMAT = "YYYY-MM-DD";
+var DEFAULT_WEEKLY_NOTE_FORMAT = "gggg-[W]ww";
+var DEFAULT_MONTHLY_NOTE_FORMAT = "YYYY-MM";
+
+/**
+ * Read the user settings for the `daily-notes` plugin
+ * to keep behavior of creating a new note in-sync.
+ */
+function getDailyNoteSettings() {
+    var _a, _b, _c, _d, _e, _f;
+    try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        var _g = window.app, internalPlugins = _g.internalPlugins, plugins = _g.plugins;
+        var dailyNoteSettings = (_b = (_a = internalPlugins.getPluginById("daily-notes")) === null || _a === void 0 ? void 0 : _a.instance) === null || _b === void 0 ? void 0 : _b.options;
+        var periodicNotesSettings = (_d = (_c = plugins.getPlugin("periodic-notes")) === null || _c === void 0 ? void 0 : _c.settings) === null || _d === void 0 ? void 0 : _d.daily;
+        var settings = periodicNotesSettings || dailyNoteSettings || {};
+        return {
+            format: settings.format || DEFAULT_DAILY_NOTE_FORMAT,
+            folder: ((_e = settings.folder) === null || _e === void 0 ? void 0 : _e.trim()) || "",
+            template: ((_f = settings.template) === null || _f === void 0 ? void 0 : _f.trim()) || "",
+        };
+    }
+    catch (err) {
+        console.info("No custom daily note settings found!", err);
+    }
+}
+/**
+ * Read the user settings for the `weekly-notes` plugin
+ * to keep behavior of creating a new note in-sync.
+ */
+function getWeeklyNoteSettings() {
+    var _a, _b, _c, _d, _e, _f, _g;
+    try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        var pluginManager = window.app.plugins;
+        var calendarSettings = (_a = pluginManager.getPlugin("calendar")) === null || _a === void 0 ? void 0 : _a.options;
+        var periodicNotesSettings = (_c = (_b = pluginManager.getPlugin("periodic-notes")) === null || _b === void 0 ? void 0 : _b.settings) === null || _c === void 0 ? void 0 : _c.weekly;
+        if (periodicNotesSettings) {
+            return {
+                format: periodicNotesSettings.format || DEFAULT_WEEKLY_NOTE_FORMAT,
+                folder: ((_d = periodicNotesSettings.folder) === null || _d === void 0 ? void 0 : _d.trim()) || "",
+                template: ((_e = periodicNotesSettings.template) === null || _e === void 0 ? void 0 : _e.trim()) || "",
+            };
+        }
+        var settings = calendarSettings || {};
+        return {
+            format: settings.weeklyNoteFormat || DEFAULT_WEEKLY_NOTE_FORMAT,
+            folder: ((_f = settings.weeklyNoteFolder) === null || _f === void 0 ? void 0 : _f.trim()) || "",
+            template: ((_g = settings.weeklyNoteTemplate) === null || _g === void 0 ? void 0 : _g.trim()) || "",
+        };
+    }
+    catch (err) {
+        console.info("No custom weekly note settings found!", err);
+    }
+}
+/**
+ * Read the user settings for the `periodic-notes` plugin
+ * to keep behavior of creating a new note in-sync.
+ */
+function getMonthlyNoteSettings() {
+    var _a, _b, _c, _d;
+    try {
+        var settings = 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ((_b = (_a = window.app.plugins.getPlugin("periodic-notes")) === null || _a === void 0 ? void 0 : _a.settings) === null || _b === void 0 ? void 0 : _b.monthly) || {};
+        return {
+            format: settings.format || DEFAULT_MONTHLY_NOTE_FORMAT,
+            folder: ((_c = settings.folder) === null || _c === void 0 ? void 0 : _c.trim()) || "",
+            template: ((_d = settings.template) === null || _d === void 0 ? void 0 : _d.trim()) || "",
+        };
+    }
+    catch (err) {
+        console.info("No custom monthly note settings found!", err);
+    }
+}
+
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -81,45 +157,95 @@ function __generator(thisArg, body) {
     }
 }
 
-var DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
-var DailyNotesFolderMissingError = /** @class */ (function (_super) {
-    __extends(DailyNotesFolderMissingError, _super);
-    function DailyNotesFolderMissingError() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return DailyNotesFolderMissingError;
-}(Error));
-function getNotePath(directory, filename) {
-    if (!filename.endsWith(".md")) {
-        filename += ".md";
-    }
-    return obsidian__default['default'].normalizePath(path__default['default'].join(directory, filename));
+/**
+ * dateUID is a way of weekly identifying daily/weekly/monthly notes.
+ * They are prefixed with the granularity to avoid ambiguity.
+ */
+function getDateUID(date, granularity) {
+    if (granularity === void 0) { granularity = "day"; }
+    var ts = date.clone().startOf(granularity).format();
+    return granularity + "-" + ts;
+}
+function removeEscapedCharacters(format) {
+    return format.replace(/\[[^\]]*\]/g, ""); // remove everything within brackets
 }
 /**
- * Read the user settings for the `daily-notes` plugin
- * to keep behavior of creating a new note in-sync.
+ * XXX: When parsing dates that contain both week numbers and months,
+ * Moment choses to ignore the week numbers. For the week dateUID, we
+ * want the opposite behavior. Strip the MMM from the format to patch.
  */
-function getDailyNoteSettings() {
-    var _a, _b;
-    try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        var settings = window.app.internalPlugins.plugins["daily-notes"]
-            .instance.options;
-        return {
-            format: settings.format || DEFAULT_DATE_FORMAT,
-            folder: ((_a = settings.folder) === null || _a === void 0 ? void 0 : _a.trim()) || "",
-            template: ((_b = settings.template) === null || _b === void 0 ? void 0 : _b.trim()) || "",
-        };
+function isFormatAmbiguous(format, granularity) {
+    if (granularity === "week") {
+        var cleanFormat = removeEscapedCharacters(format);
+        return /w/i.test(cleanFormat) && /M{1,4}/.test(cleanFormat);
     }
-    catch (err) {
-        console.info("No custom daily note settings found!", err);
-    }
+    return false;
 }
-function appHasDailyNotesPluginLoaded() {
-    var app = window.app;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    var dailyNotesPlugin = app.internalPlugins.plugins["daily-notes"];
-    return dailyNotesPlugin && dailyNotesPlugin.enabled;
+function getDateFromFile(file, granularity) {
+    var getSettings = {
+        day: getDailyNoteSettings,
+        week: getWeeklyNoteSettings,
+        month: getMonthlyNoteSettings,
+    };
+    var format = getSettings[granularity]().format.split("/").pop();
+    var noteDate = window.moment(file.basename, format, true);
+    if (!noteDate.isValid()) {
+        return null;
+    }
+    if (isFormatAmbiguous(format, granularity)) {
+        if (granularity === "week") {
+            var cleanFormat = removeEscapedCharacters(format);
+            if (/w/i.test(cleanFormat)) {
+                return window.moment(file.basename, 
+                // If format contains week, remove month formatting
+                cleanFormat.replace(/M{1,4}/g, ""), false);
+            }
+        }
+    }
+    return noteDate;
+}
+
+function ensureFolderExists(path$1) {
+    return __awaiter(this, void 0, void 0, function () {
+        var dirs, dir;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    dirs = path$1.split("/");
+                    dirs.pop(); // remove basename
+                    dir = "";
+                    _a.label = 1;
+                case 1:
+                    if (!dirs.length) return [3 /*break*/, 4];
+                    dir = path__default['default'].join(dir, dirs.shift()).replace(/\\/g, "/");
+                    if (!!window.app.vault.getAbstractFileByPath(dir)) return [3 /*break*/, 3];
+                    return [4 /*yield*/, window.app.vault.createFolder(dir)];
+                case 2:
+                    _a.sent();
+                    _a.label = 3;
+                case 3: return [3 /*break*/, 1];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+function getNotePath(directory, filename) {
+    return __awaiter(this, void 0, void 0, function () {
+        var path$1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!filename.endsWith(".md")) {
+                        filename += ".md";
+                    }
+                    path$1 = obsidian__default['default'].normalizePath(path__default['default'].join(directory, filename));
+                    return [4 /*yield*/, ensureFolderExists(path$1)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, path$1];
+            }
+        });
+    });
 }
 function getTemplateContents(template) {
     return __awaiter(this, void 0, void 0, function () {
@@ -151,16 +277,14 @@ function getTemplateContents(template) {
         });
     });
 }
-function getDateFromFile(file) {
-    var format = getDailyNoteSettings().format;
-    var noteDate = window.moment(file.basename, format, true);
-    return noteDate.isValid() ? noteDate : null;
-}
-function getDateUID(date, granularity) {
-    if (granularity === void 0) { granularity = "day"; }
-    var ts = date.clone().startOf(granularity).format();
-    return granularity + "-" + ts;
-}
+
+var DailyNotesFolderMissingError = /** @class */ (function (_super) {
+    __extends(DailyNotesFolderMissingError, _super);
+    function DailyNotesFolderMissingError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return DailyNotesFolderMissingError;
+}(Error));
 /**
  * This function mimics the behavior of the daily-notes plugin
  * so it will replace {{date}}, {{title}}, and {{time}} with the
@@ -170,7 +294,7 @@ function getDateUID(date, granularity) {
  */
 function createDailyNote(date) {
     return __awaiter(this, void 0, void 0, function () {
-        var app, vault, moment, _a, template, format, folder, templateContents, filename, normalizedPath, createdFile, err_2;
+        var app, vault, moment, _a, template, format, folder, templateContents, filename, normalizedPath, createdFile, err_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -182,10 +306,12 @@ function createDailyNote(date) {
                 case 1:
                     templateContents = _b.sent();
                     filename = date.format(format);
-                    normalizedPath = getNotePath(folder, filename);
-                    _b.label = 2;
+                    return [4 /*yield*/, getNotePath(folder, filename)];
                 case 2:
-                    _b.trys.push([2, 4, , 5]);
+                    normalizedPath = _b.sent();
+                    _b.label = 3;
+                case 3:
+                    _b.trys.push([3, 5, , 6]);
                     return [4 /*yield*/, vault.create(normalizedPath, templateContents
                             .replace(/{{\s*(date|time)\s*:(.*?)}}/gi, function (_, _timeOrDate, momentFormat) {
                             return date.format(momentFormat.trim());
@@ -193,22 +319,22 @@ function createDailyNote(date) {
                             .replace(/{{\s*date\s*}}/gi, filename)
                             .replace(/{{\s*time\s*}}/gi, moment().format("HH:mm"))
                             .replace(/{{\s*title\s*}}/gi, filename))];
-                case 3:
+                case 4:
                     createdFile = _b.sent();
                     return [2 /*return*/, createdFile];
-                case 4:
-                    err_2 = _b.sent();
-                    console.error("Failed to create file: '" + normalizedPath + "'", err_2);
+                case 5:
+                    err_1 = _b.sent();
+                    console.error("Failed to create file: '" + normalizedPath + "'", err_1);
                     new obsidian__default['default'].Notice("Unable to create new file.");
-                    return [3 /*break*/, 5];
-                case 5: return [2 /*return*/];
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
             }
         });
     });
 }
 function getDailyNote(date, dailyNotes) {
     var _a;
-    return (_a = dailyNotes[getDateUID(date)]) !== null && _a !== void 0 ? _a : null;
+    return (_a = dailyNotes[getDateUID(date, "day")]) !== null && _a !== void 0 ? _a : null;
 }
 function getAllDailyNotes() {
     /**
@@ -223,23 +349,140 @@ function getAllDailyNotes() {
     var dailyNotes = {};
     obsidian__default['default'].Vault.recurseChildren(dailyNotesFolder, function (note) {
         if (note instanceof obsidian__default['default'].TFile) {
-            var date = getDateFromFile(note);
+            var date = getDateFromFile(note, "day");
             if (date) {
-                var dateString = getDateUID(date);
+                var dateString = getDateUID(date, "day");
                 dailyNotes[dateString] = note;
             }
         }
     });
     return dailyNotes;
 }
+
+var WeeklyNotesFolderMissingError = /** @class */ (function (_super) {
+    __extends(WeeklyNotesFolderMissingError, _super);
+    function WeeklyNotesFolderMissingError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return WeeklyNotesFolderMissingError;
+}(Error));
+function getDaysOfWeek() {
+    var moment = window.moment;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    var weekStart = moment.localeData()._week.dow;
+    var daysOfWeek = [
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+    ];
+    while (weekStart) {
+        daysOfWeek.push(daysOfWeek.shift());
+        weekStart--;
+    }
+    return daysOfWeek;
+}
+function getDayOfWeekNumericalValue(dayOfWeekName) {
+    return getDaysOfWeek().indexOf(dayOfWeekName.toLowerCase());
+}
+function createWeeklyNote(date) {
+    return __awaiter(this, void 0, void 0, function () {
+        var vault, _a, template, format, folder, templateContents, filename, normalizedPath, createdFile, err_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    vault = window.app.vault;
+                    _a = getWeeklyNoteSettings(), template = _a.template, format = _a.format, folder = _a.folder;
+                    return [4 /*yield*/, getTemplateContents(template)];
+                case 1:
+                    templateContents = _b.sent();
+                    filename = date.format(format);
+                    return [4 /*yield*/, getNotePath(folder, filename)];
+                case 2:
+                    normalizedPath = _b.sent();
+                    _b.label = 3;
+                case 3:
+                    _b.trys.push([3, 5, , 6]);
+                    return [4 /*yield*/, vault.create(normalizedPath, templateContents
+                            .replace(/{{\s*(date|time)\s*:(.*?)}}/gi, function (_, _timeOrDate, momentFormat) {
+                            return date.format(momentFormat.trim());
+                        })
+                            .replace(/{{\s*title\s*}}/gi, filename)
+                            .replace(/{{\s*(sunday|monday|tuesday|wednesday|thursday|friday|saturday)\s*:(.*?)}}/gi, function (_, dayOfWeek, momentFormat) {
+                            var day = getDayOfWeekNumericalValue(dayOfWeek);
+                            return date.weekday(day).format(momentFormat.trim());
+                        }))];
+                case 4:
+                    createdFile = _b.sent();
+                    return [2 /*return*/, createdFile];
+                case 5:
+                    err_1 = _b.sent();
+                    console.error("Failed to create file: '" + normalizedPath + "'", err_1);
+                    new obsidian__default['default'].Notice("Unable to create new file.");
+                    return [3 /*break*/, 6];
+                case 6: return [2 /*return*/];
+            }
+        });
+    });
+}
+function getWeeklyNote(date, weeklyNotes) {
+    var _a;
+    return (_a = weeklyNotes[getDateUID(date, "week")]) !== null && _a !== void 0 ? _a : null;
+}
+function getAllWeeklyNotes() {
+    var vault = window.app.vault;
+    var folder = getWeeklyNoteSettings().folder;
+    var weeklyNotesFolder = vault.getAbstractFileByPath(obsidian__default['default'].normalizePath(folder));
+    if (!weeklyNotesFolder) {
+        throw new WeeklyNotesFolderMissingError("Failed to find weekly notes folder");
+    }
+    var weeklyNotes = {};
+    obsidian__default['default'].Vault.recurseChildren(weeklyNotesFolder, function (note) {
+        if (note instanceof obsidian__default['default'].TFile) {
+            var date = getDateFromFile(note, "week");
+            if (date) {
+                var dateString = getDateUID(date, "week");
+                weeklyNotes[dateString] = note;
+            }
+        }
+    });
+    return weeklyNotes;
+}
+
+/** @class */ ((function (_super) {
+    __extends(MonthlyNotesFolderMissingError, _super);
+    function MonthlyNotesFolderMissingError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return MonthlyNotesFolderMissingError;
+})(Error));
+
+function appHasDailyNotesPluginLoaded() {
+    var _a, _b;
+    var app = window.app;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    var dailyNotesPlugin = app.internalPlugins.plugins["daily-notes"];
+    if (dailyNotesPlugin && dailyNotesPlugin.enabled) {
+        return true;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    var periodicNotes = app.plugins.getPlugin("periodic-notes");
+    return periodicNotes && ((_b = (_a = periodicNotes.settings) === null || _a === void 0 ? void 0 : _a.daily) === null || _b === void 0 ? void 0 : _b.enabled);
+}
 var appHasDailyNotesPluginLoaded_1 = appHasDailyNotesPluginLoaded;
 var createDailyNote_1 = createDailyNote;
+var createWeeklyNote_1 = createWeeklyNote;
 var getAllDailyNotes_1 = getAllDailyNotes;
+var getAllWeeklyNotes_1 = getAllWeeklyNotes;
 var getDailyNote_1 = getDailyNote;
 var getDailyNoteSettings_1 = getDailyNoteSettings;
 var getDateFromFile_1 = getDateFromFile;
 var getDateUID_1 = getDateUID;
-var getTemplateContents_1 = getTemplateContents;
+var getWeeklyNote_1 = getWeeklyNote;
+var getWeeklyNoteSettings_1 = getWeeklyNoteSettings;
 
 function noop() { }
 function run(fn) {
@@ -439,7 +682,6 @@ function make_dirty(component, i) {
 function init(component, options, instance, create_fragment, not_equal, props, dirty = [-1]) {
     const parent_component = current_component;
     set_current_component(component);
-    const prop_values = options.props || {};
     const $$ = component.$$ = {
         fragment: null,
         ctx: null,
@@ -461,7 +703,7 @@ function init(component, options, instance, create_fragment, not_equal, props, d
     };
     let ready = false;
     $$.ctx = instance
-        ? instance(component, prop_values, (i, ret, ...rest) => {
+        ? instance(component, options.props || {}, (i, ret, ...rest) => {
             const value = rest.length ? rest[0] : ret;
             if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
                 if (!$$.skip_bound && $$.bound[i])
@@ -582,15 +824,6 @@ const weekdays = [
     "friday",
     "saturday",
 ];
-function getWeeklyNoteSettings(settings) {
-    return {
-        format: settings.weeklyNoteFormat || DEFAULT_WEEK_FORMAT,
-        folder: settings.weeklyNoteFolder ? settings.weeklyNoteFolder.trim() : "",
-        template: settings.weeklyNoteTemplate
-            ? settings.weeklyNoteTemplate.trim()
-            : "",
-    };
-}
 const defaultSettings = Object.freeze({
     shouldConfirmBeforeCreate: true,
     weekStart: "locale",
@@ -601,6 +834,12 @@ const defaultSettings = Object.freeze({
     weeklyNoteFolder: "",
     localeOverride: "system-default",
 });
+function appHasPeriodicNotesPluginLoaded() {
+    var _a, _b;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const periodicNotes = window.app.plugins.getPlugin("periodic-notes");
+    return periodicNotes && ((_b = (_a = periodicNotes.settings) === null || _a === void 0 ? void 0 : _a.weekly) === null || _b === void 0 ? void 0 : _b.enabled);
+}
 class CalendarSettingsTab extends obsidian.PluginSettingTab {
     constructor(app, plugin) {
         super(app, plugin);
@@ -609,11 +848,14 @@ class CalendarSettingsTab extends obsidian.PluginSettingTab {
     display() {
         this.containerEl.empty();
         if (!appHasDailyNotesPluginLoaded_1()) {
-            this.containerEl.createEl("h3", {
-                text: "⚠️ Daily Notes plugin not enabled",
-            });
-            this.containerEl.createEl("p", {
-                text: "The calendar is best used in conjunction with the Daily Notes plugin. Enable it in your plugin settings for a more optimal experience.",
+            this.containerEl.createDiv("settings-banner", (banner) => {
+                banner.createEl("h3", {
+                    text: "⚠️ Daily Notes plugin not enabled",
+                });
+                banner.createEl("p", {
+                    cls: "setting-item-description",
+                    text: "The calendar is best used in conjunction with either the Daily Notes plugin or the Periodic Notes plugin (available in the Community Plugins catalog).",
+                });
             });
         }
         this.containerEl.createEl("h3", {
@@ -623,9 +865,14 @@ class CalendarSettingsTab extends obsidian.PluginSettingTab {
         this.addWeekStartSetting();
         this.addConfirmCreateSetting();
         this.addShowWeeklyNoteSetting();
-        if (this.plugin.options.showWeeklyNote) {
+        if (this.plugin.options.showWeeklyNote &&
+            !appHasPeriodicNotesPluginLoaded()) {
             this.containerEl.createEl("h3", {
                 text: "Weekly Note Settings",
+            });
+            this.containerEl.createEl("p", {
+                cls: "setting-item-description",
+                text: "Note: Weekly Note settings are moving. You are encouraged to install the 'Periodic Notes' plugin to keep the functionality in the future.",
             });
             this.addWeeklyNoteFormatSetting();
             this.addWeeklyNoteTemplateSetting();
@@ -780,19 +1027,17 @@ function partition(arr, predicate) {
  *
  * @param file
  */
-function getDateUIDFromFile(file, settings) {
+function getDateUIDFromFile(file) {
     if (!file) {
         return null;
     }
     // TODO: I'm not checking the path!
-    let date = getDateFromFile_1(file);
+    let date = getDateFromFile_1(file, "day");
     if (date) {
         return getDateUID_1(date, "day");
     }
-    // Check to see if the active note is a weekly-note
-    const format = getWeeklyNoteSettings(settings).format;
-    date = window.moment(file.basename, format, true);
-    if (date.isValid()) {
+    date = getDateFromFile_1(file, "week");
+    if (date) {
         return getDateUID_1(date, "week");
     }
     return null;
@@ -821,8 +1066,26 @@ function createDailyNotesStore() {
             catch (err) {
                 if (!hasError) {
                     // Avoid error being shown multiple times
-                    new obsidian.Notice("Failed to find your Daily Note folder");
                     console.log("[Calendar] Failed to find daily notes folder", err);
+                }
+                store.set({});
+                hasError = true;
+            }
+        } }, store);
+}
+function createWeeklyNotesStore() {
+    let hasError = false;
+    const store = writable(null);
+    return Object.assign({ reindex: () => {
+            try {
+                const weeklyNotes = getAllWeeklyNotes_1();
+                store.set(weeklyNotes);
+                hasError = false;
+            }
+            catch (err) {
+                if (!hasError) {
+                    // Avoid error being shown multiple times
+                    console.log("[Calendar] Failed to find weekly notes folder", err);
                 }
                 store.set({});
                 hasError = true;
@@ -831,10 +1094,11 @@ function createDailyNotesStore() {
 }
 const settings = writable(defaultSettings);
 const dailyNotes = createDailyNotesStore();
+const weeklyNotes = createWeeklyNotesStore();
 function createSelectedFileStore() {
     const store = writable(null);
     return Object.assign({ setFile: (file) => {
-            const id = getDateUIDFromFile(file, get_store_value(settings));
+            const id = getDateUIDFromFile(file);
             store.set(id);
         } }, store);
 }
@@ -892,75 +1156,15 @@ async function tryToCreateDailyNote(date, inNewSplit, settings, cb) {
     }
 }
 
-function getNotePath$1(directory, filename) {
-    if (!filename.endsWith(".md")) {
-        filename += ".md";
-    }
-    return obsidian.normalizePath(path.join(directory, filename));
-}
-
-function getDaysOfWeek() {
-    const { moment } = window;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let weekStart = moment.localeData()._week.dow;
-    const daysOfWeek = [
-        "sunday",
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-    ];
-    while (weekStart) {
-        daysOfWeek.push(daysOfWeek.shift());
-        weekStart--;
-    }
-    return daysOfWeek;
-}
-function getDayOfWeekNumericalValue(dayOfWeekName) {
-    return getDaysOfWeek().indexOf(dayOfWeekName.toLowerCase());
-}
-async function createWeeklyNote(date, settings) {
-    const { vault } = window.app;
-    const { template, format, folder } = getWeeklyNoteSettings(settings);
-    const templateContents = await getTemplateContents_1(template);
-    const filename = date.format(format);
-    const normalizedPath = getNotePath$1(folder, filename);
-    try {
-        const createdFile = await vault.create(normalizedPath, templateContents
-            .replace(/{{\s*(date|time)\s*:(.*?)}}/gi, (_, _timeOrDate, momentFormat) => {
-            return date.format(momentFormat.trim());
-        })
-            .replace(/{{\s*title\s*}}/gi, filename)
-            .replace(/{{\s*(sunday|monday|tuesday|wednesday|thursday|friday|saturday)\s*:(.*?)}}/gi, (_, dayOfWeek, momentFormat) => {
-            const day = getDayOfWeekNumericalValue(dayOfWeek);
-            return date.weekday(day).format(momentFormat.trim());
-        }));
-        return createdFile;
-    }
-    catch (err) {
-        console.error(`Failed to create file: '${normalizedPath}'`, err);
-        new obsidian.Notice("Unable to create new file.");
-    }
-}
-function getWeeklyNote(date, settings) {
-    const { vault } = window.app;
-    const { format, folder } = getWeeklyNoteSettings(settings);
-    const startOfWeek = date.clone().startOf("week");
-    const baseFilename = startOfWeek.format(format);
-    const fullPath = getNotePath$1(folder, baseFilename);
-    return vault.getAbstractFileByPath(fullPath);
-}
 /**
  * Create a Weekly Note for a given date.
  */
 async function tryToCreateWeeklyNote(date, inNewSplit, settings, cb) {
     const { workspace } = window.app;
-    const { format } = getWeeklyNoteSettings(settings);
+    const { format } = getWeeklyNoteSettings_1();
     const filename = date.format(format);
     const createFile = async () => {
-        const dailyNote = await createWeeklyNote(date, settings);
+        const dailyNote = await createWeeklyNote_1(date);
         const leaf = inNewSplit
             ? workspace.splitActiveLeaf()
             : workspace.getUnpinnedLeaf();
@@ -1254,7 +1458,9 @@ function handle_promise(promise, info) {
                     if (i !== index && block) {
                         group_outros();
                         transition_out$1(block, 1, 1, () => {
-                            info.blocks[i] = null;
+                            if (info.blocks[i] === block) {
+                                info.blocks[i] = null;
+                            }
                         });
                         check_outros();
                     }
@@ -1463,7 +1669,6 @@ function make_dirty$1(component, i) {
 function init$1(component, options, instance, create_fragment, not_equal, props, dirty = [-1]) {
     const parent_component = current_component$1;
     set_current_component$1(component);
-    const prop_values = options.props || {};
     const $$ = component.$$ = {
         fragment: null,
         ctx: null,
@@ -1485,7 +1690,7 @@ function init$1(component, options, instance, create_fragment, not_equal, props,
     };
     let ready = false;
     $$.ctx = instance
-        ? instance(component, prop_values, (i, ret, ...rest) => {
+        ? instance(component, options.props || {}, (i, ret, ...rest) => {
             const value = rest.length ? rest[0] : ret;
             if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
                 if (!$$.skip_bound && $$.bound[i])
@@ -1573,21 +1778,43 @@ function __extends$1(d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
-var DailyNotesFolderMissingError$1 = /** @class */ (function (_super) {
-    __extends$1(DailyNotesFolderMissingError, _super);
-    function DailyNotesFolderMissingError() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return DailyNotesFolderMissingError;
-}(Error));
+
+/**
+ * dateUID is a way of weekly identifying daily/weekly/monthly notes.
+ * They are prefixed with the granularity to avoid ambiguity.
+ */
 function getDateUID$1(date, granularity) {
     if (granularity === void 0) { granularity = "day"; }
     var ts = date.clone().startOf(granularity).format();
     return granularity + "-" + ts;
 }
+
+/** @class */ ((function (_super) {
+    __extends$1(DailyNotesFolderMissingError, _super);
+    function DailyNotesFolderMissingError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return DailyNotesFolderMissingError;
+})(Error));
+
+/** @class */ ((function (_super) {
+    __extends$1(WeeklyNotesFolderMissingError, _super);
+    function WeeklyNotesFolderMissingError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return WeeklyNotesFolderMissingError;
+})(Error));
+
+/** @class */ ((function (_super) {
+    __extends$1(MonthlyNotesFolderMissingError, _super);
+    function MonthlyNotesFolderMissingError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return MonthlyNotesFolderMissingError;
+})(Error));
 var getDateUID_1$1 = getDateUID$1;
 
-/* src\components\Dot.svelte generated by Svelte v3.31.0 */
+/* src/components/Dot.svelte generated by Svelte v3.32.3 */
 
 function add_css() {
 	var style = element("style");
@@ -1734,7 +1961,7 @@ class Dot extends SvelteComponent$1 {
 	}
 }
 
-/* src\components\MetadataResolver.svelte generated by Svelte v3.31.0 */
+/* src/components/MetadataResolver.svelte generated by Svelte v3.32.3 */
 
 const get_default_slot_changes_1 = dirty => ({});
 const get_default_slot_context_1 = ctx => ({ metadata: null });
@@ -1844,7 +2071,7 @@ function create_if_block$1(ctx) {
 	};
 }
 
-// (1:0) <svelte:options immutable />    <script lang="ts">;  export let metadata;  </script>    {#if metadata}
+// (1:0) <svelte:options immutable />  <script lang="ts">; export let metadata; </script>  {#if metadata}
 function create_catch_block(ctx) {
 	return {
 		c: noop$1,
@@ -1856,7 +2083,7 @@ function create_catch_block(ctx) {
 	};
 }
 
-// (8:37)       <slot metadata="{resolvedMeta}
+// (8:37)      <slot metadata="{resolvedMeta}
 function create_then_block(ctx) {
 	let current;
 	const default_slot_template = /*#slots*/ ctx[2].default;
@@ -1895,7 +2122,7 @@ function create_then_block(ctx) {
 	};
 }
 
-// (1:0) <svelte:options immutable />    <script lang="ts">;  export let metadata;  </script>    {#if metadata}
+// (1:0) <svelte:options immutable />  <script lang="ts">; export let metadata; </script>  {#if metadata}
 function create_pending_block(ctx) {
 	return {
 		c: noop$1,
@@ -2036,7 +2263,7 @@ function getMonth(displayedMonth, ..._args) {
     return month;
 }
 
-/* src\components\Day.svelte generated by Svelte v3.31.0 */
+/* src/components/Day.svelte generated by Svelte v3.32.3 */
 
 function add_css$1() {
 	var style = element("style");
@@ -2357,7 +2584,7 @@ class Day extends SvelteComponent$1 {
 	}
 }
 
-/* src\components\Arrow.svelte generated by Svelte v3.31.0 */
+/* src/components/Arrow.svelte generated by Svelte v3.32.3 */
 
 function add_css$2() {
 	var style = element("style");
@@ -2445,7 +2672,7 @@ class Arrow extends SvelteComponent$1 {
 	}
 }
 
-/* src\components\Nav.svelte generated by Svelte v3.31.0 */
+/* src/components/Nav.svelte generated by Svelte v3.32.3 */
 
 function add_css$3() {
 	var style = element("style");
@@ -2621,7 +2848,7 @@ class Nav extends SvelteComponent$1 {
 	}
 }
 
-/* src\components\WeekNum.svelte generated by Svelte v3.31.0 */
+/* src/components/WeekNum.svelte generated by Svelte v3.32.3 */
 
 function add_css$4() {
 	var style = element("style");
@@ -2892,7 +3119,7 @@ function instance$5($$self, $$props, $$invalidate) {
 
 	$$self.$$.update = () => {
 		if ($$self.$$.dirty & /*days*/ 2) {
-			 $$invalidate(7, startOfWeek = getStartOfWeek(days));
+			$$invalidate(7, startOfWeek = getStartOfWeek(days));
 		}
 	};
 
@@ -2948,7 +3175,7 @@ function getWeeklyMetadata(sources, date, ..._args) {
     return metadataReducer(sources.map((source) => source.getWeeklyMetadata(date)));
 }
 
-/* src\components\Calendar.svelte generated by Svelte v3.31.0 */
+/* src/components/Calendar.svelte generated by Svelte v3.32.3 */
 
 function add_css$5() {
 	var style = element("style");
@@ -3165,7 +3392,8 @@ function create_each_block_1(key_1, ctx) {
 			mount_component$1(day, target, anchor);
 			current = true;
 		},
-		p(ctx, dirty) {
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
 			const day_changes = {};
 			if (dirty & /*month*/ 16384) day_changes.date = /*day*/ ctx[20];
 			if (dirty & /*today*/ 1024) day_changes.today = /*today*/ ctx[10];
@@ -3238,7 +3466,9 @@ function create_each_block$2(key_1, ctx) {
 			append(tr, t1);
 			current = true;
 		},
-		p(ctx, dirty) {
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
+
 			if (/*showWeekNums*/ ctx[1]) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
@@ -3263,7 +3493,7 @@ function create_each_block$2(key_1, ctx) {
 			}
 
 			if (dirty & /*month, today, displayedMonth, onClickDay, onContextMenuDay, onHoverDay, getDailyMetadata, sources, selectedId*/ 18261) {
-				const each_value_1 = /*week*/ ctx[17].days;
+				each_value_1 = /*week*/ ctx[17].days;
 				group_outros();
 				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value_1, each_1_lookup, tr, outro_and_destroy_block, create_each_block_1, t1, get_each_context_1);
 				check_outros();
@@ -3493,7 +3723,7 @@ function create_fragment$6(ctx) {
 			}
 
 			if (dirty & /*month, today, displayedMonth, onClickDay, onContextMenuDay, onHoverDay, getDailyMetadata, sources, selectedId, getWeeklyMetadata, onClickWeek, onContextMenuWeek, onHoverWeek, showWeekNums*/ 18431) {
-				const each_value = /*month*/ ctx[14];
+				each_value = /*month*/ ctx[14];
 				group_outros();
 				each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx, each_value, each2_lookup, tbody, outro_and_destroy_block, create_each_block$2, null, get_each_context$2);
 				check_outros();
@@ -3580,11 +3810,11 @@ function instance$6($$self, $$props, $$invalidate) {
 
 	$$self.$$.update = () => {
 		if ($$self.$$.dirty & /*displayedMonth, localeData*/ 65537) {
-			 $$invalidate(14, month = getMonth(displayedMonth, localeData));
+			$$invalidate(14, month = getMonth(displayedMonth, localeData));
 		}
 
 		if ($$self.$$.dirty & /*today, localeData*/ 66560) {
-			 $$invalidate(15, daysOfWeek = getDaysOfWeek$1(today, localeData));
+			$$invalidate(15, daysOfWeek = getDaysOfWeek$1(today, localeData));
 		}
 	};
 
@@ -3725,7 +3955,7 @@ function configureGlobalMomentLocale(localeOverride = "system-default", weekStar
     return currentLocale;
 }
 
-/* src/ui/Calendar.svelte generated by Svelte v3.31.0 */
+/* src/ui/Calendar.svelte generated by Svelte v3.32.3 */
 
 function create_fragment$7(ctx) {
 	let calendarbase;
@@ -3733,7 +3963,7 @@ function create_fragment$7(ctx) {
 	let current;
 
 	function calendarbase_displayedMonth_binding(value) {
-		/*calendarbase_displayedMonth_binding*/ ctx[12].call(null, value);
+		/*calendarbase_displayedMonth_binding*/ ctx[12](value);
 	}
 
 	let calendarbase_props = {
@@ -3826,6 +4056,7 @@ function instance$7($$self, $$props, $$invalidate) {
 	function getToday(settings) {
 		configureGlobalMomentLocale(settings.localeOverride, settings.weekStart);
 		dailyNotes.reindex();
+		weeklyNotes.reindex();
 		return window.moment();
 	}
 
@@ -3866,7 +4097,7 @@ function instance$7($$self, $$props, $$invalidate) {
 
 	$$self.$$.update = () => {
 		if ($$self.$$.dirty & /*$settings*/ 256) {
-			 $$invalidate(9, today = getToday($settings));
+			$$invalidate(9, today = getToday($settings));
 		}
 	};
 
@@ -3936,7 +4167,7 @@ const streakSource = {
         };
     },
     getWeeklyMetadata: async (date) => {
-        const file = getWeeklyNote(date, get_store_value(settings));
+        const file = getWeeklyNote_1(date, get_store_value(weeklyNotes));
         return {
             classes: getStreakClasses(file),
             dots: [],
@@ -3980,7 +4211,7 @@ const customTagsSource = {
         };
     },
     getWeeklyMetadata: async (date) => {
-        const file = getWeeklyNote(date, get_store_value(settings));
+        const file = getWeeklyNote_1(date, get_store_value(weeklyNotes));
         return {
             dataAttributes: getFormattedTagAttributes(file),
             dots: [],
@@ -4020,7 +4251,7 @@ const tasksSource = {
         };
     },
     getWeeklyMetadata: async (date) => {
-        const file = getWeeklyNote(date, get_store_value(settings));
+        const file = getWeeklyNote_1(date, get_store_value(weeklyNotes));
         const dots = await getDotsForDailyNote(file);
         return {
             dots,
@@ -4062,7 +4293,7 @@ const wordCountSource = {
         };
     },
     getWeeklyMetadata: async (date) => {
-        const file = getWeeklyNote(date, get_store_value(settings));
+        const file = getWeeklyNote_1(date, get_store_value(weeklyNotes));
         const dots = await getDotsForDailyNote$1(file);
         return {
             dots,
@@ -4075,6 +4306,7 @@ class CalendarView extends obsidian.ItemView {
         super(leaf);
         this.openOrCreateDailyNote = this.openOrCreateDailyNote.bind(this);
         this.openOrCreateWeeklyNote = this.openOrCreateWeeklyNote.bind(this);
+        this.onNoteSettingsUpdate = this.onNoteSettingsUpdate.bind(this);
         this.onFileCreated = this.onFileCreated.bind(this);
         this.onFileDeleted = this.onFileDeleted.bind(this);
         this.onFileModified = this.onFileModified.bind(this);
@@ -4083,6 +4315,9 @@ class CalendarView extends obsidian.ItemView {
         this.onHoverWeek = this.onHoverWeek.bind(this);
         this.onContextMenuDay = this.onContextMenuDay.bind(this);
         this.onContextMenuWeek = this.onContextMenuWeek.bind(this);
+        this.registerEvent(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.app.workspace.on("periodic-notes:settings-updated", this.onNoteSettingsUpdate));
         this.registerEvent(this.app.vault.on("create", this.onFileCreated));
         this.registerEvent(this.app.vault.on("delete", this.onFileDeleted));
         this.registerEvent(this.app.vault.on("modify", this.onFileModified));
@@ -4147,8 +4382,8 @@ class CalendarView extends obsidian.ItemView {
         if (!isMetaPressed) {
             return;
         }
-        const note = getWeeklyNote(date, this.settings);
-        const { format } = getWeeklyNoteSettings(this.settings);
+        const note = getWeeklyNote_1(date, get_store_value(weeklyNotes));
+        const { format } = getWeeklyNoteSettings_1();
         this.app.workspace.trigger("link-hover", this, targetEl, date.format(format), note === null || note === void 0 ? void 0 : note.path);
     }
     onContextMenuDay(date, event) {
@@ -4163,7 +4398,7 @@ class CalendarView extends obsidian.ItemView {
         });
     }
     onContextMenuWeek(date, event) {
-        const note = getWeeklyNote(date, this.settings);
+        const note = getWeeklyNote_1(date, get_store_value(weeklyNotes));
         if (!note) {
             // If no file exists for a given day, show nothing.
             return;
@@ -4173,24 +4408,35 @@ class CalendarView extends obsidian.ItemView {
             y: event.pageY,
         });
     }
+    onNoteSettingsUpdate() {
+        dailyNotes.reindex();
+        weeklyNotes.reindex();
+        this.updateActiveFile();
+    }
     async onFileDeleted(file) {
-        const date = getDateFromFile_1(file);
-        if (date) {
+        if (getDateFromFile_1(file, "day")) {
             dailyNotes.reindex();
+            this.updateActiveFile();
+        }
+        if (getDateFromFile_1(file, "week")) {
+            weeklyNotes.reindex();
             this.updateActiveFile();
         }
     }
     async onFileModified(file) {
-        const date = getDateFromFile_1(file);
+        const date = getDateFromFile_1(file, "day") || getDateFromFile_1(file, "week");
         if (date && this.calendar) {
             this.calendar.tick();
         }
     }
     onFileCreated(file) {
-        if (this.app.workspace.layoutReady) {
-            const date = getDateFromFile_1(file);
-            if (date && this.calendar) {
+        if (this.app.workspace.layoutReady && this.calendar) {
+            if (getDateFromFile_1(file, "day")) {
                 dailyNotes.reindex();
+                this.calendar.tick();
+            }
+            if (getDateFromFile_1(file, "week")) {
+                weeklyNotes.reindex();
                 this.calendar.tick();
             }
         }
@@ -4216,13 +4462,13 @@ class CalendarView extends obsidian.ItemView {
         const { activeLeaf } = this.app.workspace;
         if (activeLeaf.view instanceof obsidian.FileView) {
             // Check to see if the active note is a daily-note
-            let date = getDateFromFile_1(activeLeaf.view.file);
+            let date = getDateFromFile_1(activeLeaf.view.file, "day");
             if (date) {
                 this.calendar.$set({ displayedMonth: date });
                 return;
             }
             // Check to see if the active note is a weekly-note
-            const format = getWeeklyNoteSettings(this.settings).format;
+            const { format } = getWeeklyNoteSettings_1();
             date = moment(activeLeaf.view.file.basename, format, true);
             if (date.isValid()) {
                 this.calendar.$set({ displayedMonth: date });
@@ -4233,7 +4479,7 @@ class CalendarView extends obsidian.ItemView {
     async openOrCreateWeeklyNote(date, inNewSplit) {
         const { workspace } = this.app;
         const startOfWeek = date.clone().startOf("week");
-        const existingFile = getWeeklyNote(date, this.settings);
+        const existingFile = getWeeklyNote_1(date, get_store_value(weeklyNotes));
         if (!existingFile) {
             // File doesn't exist
             tryToCreateWeeklyNote(startOfWeek, inNewSplit, this.settings, (file) => {

@@ -1,12 +1,7 @@
 ---
 title: 学习 Spring 实战第5版：
-slug: spring-in-action-5-
-author: YJ2CS
-avatar: '/custom/avatar.webp'
-authorLink: https://lamirs.vercel.app/
-authorAbout: 愿青年摆脱了冷气，只是向前走！
-authorDesc: 愿青年摆脱了冷气，只是向前走！
-comments: true
+alias:
+  - spring-in-action-5-/index.html
 categories:
   - learn-java
 tags:
@@ -16,7 +11,7 @@ tags:
   - java
 no-photos: 'https://random.52ecy.cn/randbg.php?size=1&rid-{{tp_creation_date:f=YYYY-MM-DD}}-{{tp_time:f=HH-mm-ss}}'
 date: '{{tp_creation_date:f=YYYY-MM-DD}} {{tp_time:f=HH:mm:ss}}'
-date updated: '{{tp_last_modif_date:f=YYYY-MM-DD}} {{tp_time:f=HH:mm:ss}}'
+lastmod: '{{tp_last_modif_date:f=YYYY-MM-DD}} {{tp_time:f=HH:mm:ss}}'
 
 ---
 

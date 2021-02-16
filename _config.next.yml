@@ -49,9 +49,9 @@ darkmode: true
 
 favicon:
   #小图标 默认的NexT
-  small: /custom/favicon-16x16-next.png
+  small: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/icon/favicon-16x16-next.png
   #中图标 默认NexT
-  medium: /custom/favicon-32x32-next.png
+  medium: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/icon/favicon-32x32-next.png
   #苹果触摸图标
   apple_touch_icon: /images/apple-touch-icon-next.png
   #safari固定标签
@@ -70,7 +70,7 @@ creative_commons:
   license: by-nc-sa
   sidebar: false
   post: false
-  language:
+  language: deed.zh
 
 # ---------------------------------------------------------------
 # Menu Settings
@@ -82,20 +82,14 @@ creative_commons:
 # External url should start with http:// or https://
 menu: #目录 #首页 fa-home 字体漂亮图标 下同
   home: / || fa fa-home
-  # 基石内容
-  快速导航: /readme/ || fas fa-university
+  # 基石内容 index-la
+  快速导航: /cdb0d1ce/ || fas fa-university
   about: /about/ || fa fa-user
   tags: /tags/ || fa fa-tags
   categories: /categories/ || fa fa-th
   archives: /archives/ || fa fa-archive
-  # 学习资源
-  # 学习资源: /learning-resources/ || fas fa-paperclip
   #友链
   友人帐: /links/ || fa fa-link
-  # 留言板
-  # 留言板: /msgboard/ || far fa-comments
-  # 赞助商,捐赠
-  # 赞助者: /sponsor/ || fas fa-donate
   #schedule: /schedule/ || fa fa-calendar
   #sitemap: /sitemap.xml || fa fa-sitemap
   #commonweal: /404/ || fa fa-heartbeat
@@ -137,7 +131,7 @@ sidebar:
 # Sidebar Avatar
 avatar: #头像图片路径 图片放置在next/source/images
   # Replace the default image and set the url here.
-  url: /custom/avatar.webp
+  url: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/avatar/avatar.webp
   # If true, the avatar will be dispalyed in circle.
   #是否显示圆形头像，true表示圆形，false默认
   rounded: true
@@ -233,7 +227,7 @@ footer:
     # Icon name in Font Awesome. See: https://fontawesome.com/icons
     name: fa fa-heart
     # If you want to animate the icon, set it to true.
-    animated: false
+    animated: true
     # Change the color of icon, using Hex Code.
     color: "#ff0000"
 
@@ -312,12 +306,12 @@ reward:
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
   #  paypal: #https://www.paypal.me/hojuncn
-  alipay: /custom/donate/AliPayQR.webp # 小图二维码
-  #  alipayQR: /custom/donate/AliPayQR.jpg
-  #  alipayHBQR: /custom/donate/AliPayHBQR.jpg
-  wechat: /custom/donate/WeChatQR.webp # 小图二维码
-#  wechatQR: /custom/donate/WeChanQR.jpg #微信收款码
-#  wechatSQ: /custom/donate/WeChanSQ.jpg #赞赏码
+  alipay: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/AliPayQR.webp # 小图二维码
+  #  alipayQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/AliPayQR.jpg
+  #  alipayHBQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/AliPayHBQR.jpg
+  wechat: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/WeChatQR.webp # 小图二维码
+#  wechatQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/WeChanQR.jpg #微信收款码
+#  wechatSQ: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/WeChanSQ.jpg #赞赏码
 
 # Subscribe through Telegram Channel, Twitter, etc.
 # Usage: `Key: permalink || icon` (Font Awesome)
@@ -385,7 +379,7 @@ calendar:
 
 # Preconnect CDN for fonts and plugins.
 # For more information: https://www.w3.org/TR/resource-hints/#preconnect
-preconnect: false
+preconnect: true
 
 # Set the text alignment in posts / pages.
 text_align:
@@ -459,10 +453,10 @@ github_banner:
 # ---------------------------------------------------------------
 
 font:
-  enable: false
+  enable: true
 
   # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
-  host:
+  host: https://fonts.loli.net
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -551,8 +545,15 @@ math:
   # If you set it to true, it will load mathjax / katex srcipt EVERY PAGE.
   every_page: false
 
+  # see ttps://github.com/next-theme/hexo-filter-mathjax
   mathjax:
     enable: false
+    tags: none # or 'ams' or 'all'
+    single_dollars: true # enable single dollar signs as in-line math delimiters
+    cjk_width: 0.9 # relative CJK char width
+    normal_width: 0.6 # relative normal (monospace) width
+    append_css: true # add CSS to pages rendered by MathJax
+    every_page: false # if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter
 
   katex:
     enable: false
@@ -570,7 +571,7 @@ fancybox: false
 # A JavaScript library for zooming images like Medium.
 # Warning: Do not enable both `fancybox` and `mediumzoom`.
 # For more information: https://medium-zoom.francoischalifour.com
-mediumzoom: false
+mediumzoom: true
 
 # Vanilla JavaScript plugin for lazyloading images.
 # For more information: https://apoorv.pro/lozad.js/demo/
@@ -614,11 +615,11 @@ comments:
   style: tabs
   # Choose a comment system to be displayed by default.
   # Available values: disqus | disqusjs | changyan | livere | gitalk | utterances
-  active:
+  active: disqusjs
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
-  lazyload: false
+  lazyload: true
   # Modify texts or order for any navs, here are some examples.
   nav:
     #disqus:
@@ -713,7 +714,7 @@ add_this_id:
 
 # Google Analytics
 google_analytics:
-  tracking_id: # <app_id>
+  tracking_id: UA-180490240-1
   # By default, NexT will load an external gtag.js script on your site.
   # If you only need the pageview feature, set the following option to true to get a better performance.
   only_pageview: false
@@ -861,9 +862,9 @@ mermaid:
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
 motion:
-  # 不启动动画
+  # 是否启动动画
   enable: true
-  async: false
+  async: true
   transition:
     # All available transition variants: https://theme-next.js.org/animate/
     post_block: fadeIn
@@ -876,8 +877,8 @@ motion:
 # Progress bar in the top during page loading.
 # For more information: https://github.com/rstacruz/nprogress
 nprogress:
-  enable: false
-  spinner: true
+  enable: true
+  spinner: false
 
 # Canvas ribbon
 # For more information: https://github.com/hustcc/ribbon.js
@@ -899,7 +900,7 @@ vendors:
   # The CDN provider of NexT internal scripts.
   # Available values: local | jsdelivr | unpkg | cdnjs
   # Warning: If you are using the latest master branch of NexT, please set `internal: local`
-  internal: local
+  internal: jsdelivr
   # The default CDN provider of third-party plugins.
   # Available values: local | jsdelivr | unpkg | cdnjs
   # Dependencies for `plugins: local`: https://github.com/next-theme/plugins
@@ -990,28 +991,6 @@ images: images
 
 # =====================================end,下面是个性配置，不是next默认选项================================
 # =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-# =====================================end,下面是个性配置，不是next默认选项================================
-
-# 文章末尾添加“本文结束”标记
-passage_end_tag:
-  enabled: false
-
-# 添加共享按钮
-shareto: false
-
-#daovoice: true  #daovoice
-#daovoice_app_id: b6dbddb6 #我们注册获取的id
-
-# Hide single post
-hide:
-  hide_post: false
 
 # visitors count
 counter: true

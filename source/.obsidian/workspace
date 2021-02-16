@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "9b2635f94409495c",
+        "id": "b8ecb624adccd3dd",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "_抽象导航/_站点抽象导航.md",
+            "file": "_posts/testObsidian语法.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -19,12 +19,12 @@
         }
       },
       {
-        "id": "6cfbc00d37d28cb5",
+        "id": "4ae752312e5d4ed3",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "_抽象导航/_站点抽象导航.md",
+            "file": "_posts/testObsidian语法.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -34,25 +34,25 @@
         }
       },
       {
-        "id": "1cdb2b7558efff50",
+        "id": "701d2adb1feeb5d5",
         "type": "leaf",
         "active": true,
         "state": {
           "type": "markdown",
           "state": {
-            "file": "_抽象导航/_站点抽象导航.md",
+            "file": "_posts/testObsidian语法.md",
             "mode": "source"
           }
         }
       },
       {
-        "id": "80c9574c5f123635",
+        "id": "0a4844fcf14b7cec",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "custom/README-custom.md",
-            "mode": "preview"
+            "file": "_posts/index-la.md",
+            "mode": "source"
           }
         }
       }
@@ -81,7 +81,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "readme",
+                "query": "testO",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -98,8 +98,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -127,7 +126,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_抽象导航/_站点抽象导航.md",
+                "file": "_posts/testObsidian语法.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -153,12 +152,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_抽象导航/_站点抽象导航.md"
+                "file": "_posts/testObsidian语法.md"
               }
             }
           },
           {
-            "id": "cb9bbb0e999840a6",
+            "id": "930dc6d590311d48",
             "type": "leaf",
             "state": {
               "type": "calendar",
@@ -173,15 +172,15 @@
     "collapsed": true
   },
   "lastOpenFiles": [
-    "_抽象导航/_站点抽象导航.md",
-    "_posts/index.md",
-    "custom/README.md",
-    "404/index.md",
-    "_posts/learning-resources.md",
-    "404/Untitled.md",
-    "_posts/前端学习路线-目录.md",
-    "_posts/readme.md",
-    "_posts/git-使用https协议后-push时提示需要输入username和password.md",
-    "_posts/前端学习路线-1-互联网是如何工作的.md"
+    "_posts/testObsidian语法.md",
+    "_posts/0-1-预科第一天.md",
+    "_posts/字符替换正则表达式.md",
+    "_posts/Hexo的NexT主题打赏功能.md",
+    "_posts/hexo主题配置.md",
+    "_posts/hexo更换主题后出现问题-warn-no-layout-index-html.md",
+    "_posts/hexo博客搭建.md",
+    "_posts/fatal-error-uncaught-runtimeexception-error-saving-action-error-saving-action.md",
+    "_posts/index-la.md",
+    "_抽象导航/_站点抽象导航.md"
   ]
 }

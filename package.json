@@ -8,7 +8,9 @@
   "dependencies": {
     "@gerhobbelt/markdown-it-wikilinks": "1.1.1-7",
     "hexo": "^5.3.0",
+    "hexo-abbrlink": "^2.2.1",
     "hexo-excerpt": "^1.1.6",
+    "hexo-filter-emoji": "^2.2.1",
     "hexo-generator-alias": "^1.0.0",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
@@ -18,15 +20,15 @@
     "hexo-generator-searchdb": "^1.3.3",
     "hexo-generator-sitemap": "^2.1.0",
     "hexo-generator-tag": "^1.0.0",
-    "hexo-github-card": "^1.0.5",
     "hexo-hide-posts": "^0.1.1",
+    "hexo-next-coauthor": "theme-next/hexo-next-coauthor",
+    "hexo-next-fireworks": "next-theme/hexo-next-fireworks",
     "hexo-renderer-ejs": "^1.0.0",
     "hexo-renderer-markdown-it": "^5.0.0",
     "hexo-renderer-stylus": "^2.0.1",
     "hexo-server": "^2.0.0",
     "hexo-theme-next": "^8.2.1",
     "hexo-word-counter": "0.0.3",
-    "markdown-it-emoji": "^2.0.0",
     "prism-themes": "^1.5.0"
   },
   "scripts": {

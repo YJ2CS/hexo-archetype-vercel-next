@@ -1,0 +1,3 @@
+[submodule "hexo-cdn"]
+	path = hexo-cdn
+	url = https://github.com/YJ2CS/hexo-cdn.git
