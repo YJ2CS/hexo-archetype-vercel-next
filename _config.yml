@@ -27,7 +27,7 @@ root: /
 # ':year/:month/:day/:title/' | ':abbrlink' | ':url/' | <another link>
 # 不带后缀名会导致有的web server(比如常见的GitHub pages)发送错误的MIME类型，浏览器接收到非HTML的MIME，会默认进行下载
 # 所以，请带一个`/`后缀，或者以.html为后缀，即必须需要有后缀
-permalink: ':slug/'
+permalink: ":abbrlink/"
 permalink_defaults:
   langu: cn # :langu -> cn (replace),
   #then you can write like this: permalink: :langu/:title/
@@ -40,12 +40,21 @@ pretty_urls:
   # 是否在永久链接中保留尾部的 .html, 设置为 false 时去除 (对尾部的 index.html无效)
   trailing_html: false
 
-#短链接
-# package.json
-#     "hexo-abbrlink": "^2.2.1",
-# abbrlink:
-#   alg: crc16 #算法： crc16(default) and crc32
-#   rep: hex #进制： dec(default) and hex: dec #输出进制：十进制和十六进制，默认为10进制。丨dec为十进制，hex为十六进制
+# 短链接
+# "hexo-abbrlink"
+# abbrlink config
+abbrlink:
+  alg: crc32 #support crc16(default) and crc32
+  rep: hex #support dec(default) and hex
+  drafts: false #(true)Process draft,(false)Do not process draft. false(default)
+  # Generate categories from directory-tree
+  # depth: the max_depth of directory-tree you want to generate, should > 0
+  auto_category:
+    enable: false #true(default)
+    depth: 3 #3(default)
+  auto_title: false #enable auto title, it can auto fill the title by path
+  auto_date: false #enable auto date, it can auto fill the date by time today
+  force: false #enable force mode,in this mode, the plugin will ignore the cache, and calc the abbrlink for every post even it already had abbrlink.
 
 # Directory
 source_dir: source
@@ -72,7 +81,7 @@ titlecase: false # Transform title into titlecase
 # 在新选项卡中打开外部链接
 external_link: # Open external links in new tab
   enable: true
-# filename_case	把文件名称转换为 (1) 小写或 (2) 大写
+# filename_case	把文件名称转换为 1 小写或 2 大写
 filename_case: 1
 # 对草稿提供渲染 render_drafts	显示草稿
 render_drafts: false
@@ -103,15 +112,16 @@ prismjs:
   enable: true
   preprocess: false
   line_number: true
-  tab_replace: ''
+  tab_replace: ""
 
 # 站内搜索
 # hexo-generator-searchdb
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
+# 被next主题中同名配置覆盖
+# search:
+#   path: search.xml
+#   field: post
+#   format: html
+#   limit: 10000
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -156,7 +166,7 @@ feed:
   hub:
   content:
   content_limit: 140
-  content_limit_delim: ' '
+  content_limit_delim: " "
   order_by: -date
   icon: icon.png
   autodiscovery: true
@@ -201,14 +211,6 @@ sitemap:
 # baidusitemap:
 #   path: baidusitemap.xml
 
-# 标签云
-#tag_cloud:
-#  textFont: Trebuchet MS, Helvetica
-#  textColor: '#fc6423'
-#  textHeight: 17
-#  outlineColor: '#b3e5ef'
-#  maxSpeed: 0.07
-
 # Markdown-it config
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
 ## cn_Docs: https://markdown-it.docschina.org/api/MarkdownIt.html#markdownit-new
@@ -234,10 +236,10 @@ markdown:
     - markdown-it-ins
     - markdown-it-sub
     - markdown-it-sup
-    - markdown-it-emoji # add emoji
+    # - markdown-it-emoji # add emoji
     # 增加对wikilinks的解析支持
     # [[title home]] -> [title_home](...)
-    - name: '@gerhobbelt/markdown-it-wikilinks'
+    - name: "@gerhobbelt/markdown-it-wikilinks"
       options:
         # deaault: linkPattern: /\[\[([^\x00-\x1f|]+?)(\|([\s\S]+?))?\]\]/,          // accept anything, except control characters (CR, LF, etc) or |
         # linkPattern: /\[\[([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+)(\|([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+))?\]\]/
@@ -252,25 +254,7 @@ markdown:
         # default: .html
         # [[title home]] -> [title_home](...title_home/index.html),注意后缀从默认的.html更改为 /index.html
         # uriSuffix: '/index.html'
-        uriSuffix: ''
-    # - name: markdown-it-obsidian
-    #   options:
-    #     # deaault: linkPattern: /\[\[([^\x00-\x1f|]+?)(\|([\s\S]+?))?\]\]/,          // accept anything, except control characters (CR, LF, etc) or |
-    #     # linkPattern: /\[\[([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+)(\|([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+))?\]\]/
-    #     # 将所有 wiki 链接渲染为绝对链接。
-    #     # 默认： false
-    #     # 这项要根据你前面对链接的渲染设置来更改
-    #     makeAllLinksAbsolute: true
-    #     # 绝对链接的前缀
-    #     # default: /
-    #     # baseURL: 'https://lamirs.vercel.app/'
-    #     # url的后缀,
-    #     # default: .html
-    #     # [[title home]] -> [title_home](...title_home/index.html),注意后缀从默认的.html更改为 /index.html
-    #     # uriSuffix: '/index.html'
-    #     uriSuffix: ''
-
-
+        uriSuffix: ""
   anchors:
     level: 1
     collisionSuffix: "v"
@@ -290,50 +274,8 @@ server:
 # 博客加上萌萌的宠物或萌妹子
 # Live2D
 # https://github.com/EYHN/hexo-helper-live2d
-# live2d:
-#   enable: true
-  # enable: false
-  # scriptFrom: local # 默认
-  # scriptFrom: jsdelivr # jsdelivr CDN
-  # scriptFrom: unpkg # unpkg CDN
-  # scriptFrom: https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js # 你的自定义 url
-  # pluginRootPath: live2dw/ # 插件在站点上的根目录(相对路径)
-  # pluginJsPath: lib/ # 脚本文件相对与插件根目录路径
-  # pluginModelPath: assets/ # 模型文件相对与插件根目录路径
-  # tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中
-  # debug: false # 调试, 是否在控制台输出日志
-  # model:
-    # use: live2d-widget-model-koharu
-    # use: live2d-widget-model-wanko # npm-module package name
-    # use: wanko # 博客根目录/live2d_models/ 下的目录名
-    # use: ./wives/wanko # 相对于博客根目录的路径
-    # use: https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json # 你的自定义 url
-# -------------------------------------------------------------------
-    # Live2D General Settings
-    ## https://github.com/xiazeyu/live2d-widget.js
-    ## https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init
-    # scale: 1
-    # hHeadPos: 0.5
-    # vHeadPos: 0.618
-  # display:
-  #   superSample: 2
-  #   width: 75
-  #   height: 150
-  #   # position: right
-  #   position: 'left'
-  #   hOffset: 0
-  #   vOffset: -20
-  # mobile:
-  #   show: false
-  #   scale: 0.5
-  # react:
-  #   opacityDefault: 0.7
-  #   opacityOnHover: 0.2
 
-
-
-
-# 自动摘录
+# 自动摘录 hexo-excerpt
 # 本插件通过注册generator对所有文章在生成的时候进行处理，
 # 如果文章内容含有10个一级html标签，那么取这10个做为列表页面摘要，否则全部显示。
 # 您可以通过在配置中设置深度（默认值为 10）来指定摘录的大小。
@@ -341,16 +283,14 @@ server:
 # 默认行为 hideWholePostExcerpts: false 是只显示摘录，如果它不会是整个职位。设置为覆盖它，并显示整个帖子摘录。
 excerpt:
   depth: 5
-  excerpt_excludes: [ ]
-  more_excludes: [ ]
+  excerpt_excludes: []
+  more_excludes: []
   hideWholePostExcerpts: true
+# auto_excerpt 在next7.6版本后已经不再支持
 
-# 下面这种做法在next7.6版本后已经不再支持
-# Automatically Excerpt. Not recommend.
-# Use <!-- more --> in the post to control excerpt accurately.
-## 自动摘录，开启，暂时没发现bug
-#auto_excerpt:
-#  enable: true
-#  length: 150
-#  # Automatically scroll page to section which is under <!-- more --> mark.
-#  scroll_to_more: true
+# hexo-filter-emoji
+emoji:
+  enable: true
+  className: github-emoji
+  styles:
+  customEmojis:

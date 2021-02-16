@@ -10,7 +10,7 @@ categories:
       - 'fix'
       - 'bugfix'
       - 'bug'
-  - title: '🧰 Maintenance'
+  - title: '🧰 Maintenance' # 维护 dependencies
     label: 'chore'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
@@ -26,12 +26,18 @@ version-resolver:
       - 'patch'
   default: patch
 template: |
-  ## Changes
+  ## ✏️ Changes
 
   $CHANGES
 
-  ## Previous
+  ## CONTRIBUTORS
+
+  $CONTRIBUTORS
+
+  ## PREVIOUS
 
   if you want to back to previous version, you can click this:
 
-  [Previous version：$PREVIOUS_TAG](https://github.com/YJ2CS/lamirs-hexo-blog/releases/tag/$PREVIOUS_TAG)
+  如果您要回退到以前的版本，可以单击以下按钮：
+
+  [PREVIOUS: $PREVIOUS_TAG](https://github.com/YJ2CS/lamirs-hexo-blog/releases/tag/$PREVIOUS_TAG)

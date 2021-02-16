@@ -1,0 +1,4 @@
+- name: YJ2CS  #友链名称
+  avatar: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/avatar/avatar.webp  #友链头像
+  site: https://github.com/yj2cs/
+  info: 欢迎Follow我的Github.  #友链说明
