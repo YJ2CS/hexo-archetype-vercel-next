@@ -3,6 +3,7 @@ title: Hello，欢迎来到Lamirs ☆ Daze
 alias:
   - sponsor/index.html
   - msgboard/index.html
+no-photos: https://random.52ecy.cn/randbg.php?size=1&rid-2021-02-01-21-30-07
 date: '2021-02-01 21:30:07'
 lastmod: '2021-02-09 21:54:29'
 

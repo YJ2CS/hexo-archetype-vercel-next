@@ -1,6 +1,5 @@
 ---
 title: 如何学C++
-abbrlink: c92cf1d5
 alias:
   - 0-1-如何学cpp/index.html
 categories:

@@ -18,18 +18,20 @@ language: zh-CN
 timezone: UTC
 
 # URL
-# 注意，此选项一定要符合你实际的域名,影响gitalk的配置
+# 注意，此选项一定要符合你实际的域名,影响gitalk等评论系统的配置
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://lamirs.vercel.app # wugenqiang是我的账号，修改为自己的账号
 root: /
 
+# see https://hexo.io/zh-cn/docs/permalinks
 # default ':year/:month/:day/:title/'
-# ':year/:month/:day/:title/' | ':abbrlink' | ':url/' | <another link>
+# ':year/:month/:day/:title/' | ':abbrlink' | ':name/' | ':slug' | <another link>
+# 短链接 ':abbrlink'  hexo-abbrlink
 # 不带后缀名会导致有的web server(比如常见的GitHub pages)发送错误的MIME类型，浏览器接收到非HTML的MIME，会默认进行下载
 # 所以，请带一个`/`后缀，或者以.html为后缀，即必须需要有后缀
-permalink: ":abbrlink/"
+permalink: ":name/"
 permalink_defaults:
-  langu: cn # :langu -> cn (replace),
+  langu: cn # :langu -> cn (replace field),
   #then you can write like this: permalink: :langu/:title/
   # in this,:langu will be replaced with cn
 
@@ -39,22 +41,6 @@ pretty_urls:
   trailing_index: false
   # 是否在永久链接中保留尾部的 .html, 设置为 false 时去除 (对尾部的 index.html无效)
   trailing_html: false
-
-# 短链接
-# "hexo-abbrlink"
-# abbrlink config
-abbrlink:
-  alg: crc32 #support crc16(default) and crc32
-  rep: hex #support dec(default) and hex
-  drafts: false #(true)Process draft,(false)Do not process draft. false(default)
-  # Generate categories from directory-tree
-  # depth: the max_depth of directory-tree you want to generate, should > 0
-  auto_category:
-    enable: false #true(default)
-    depth: 3 #3(default)
-  auto_title: false #enable auto title, it can auto fill the title by path
-  auto_date: false #enable auto date, it can auto fill the date by time today
-  force: false #enable force mode,in this mode, the plugin will ignore the cache, and calc the abbrlink for every post even it already had abbrlink.
 
 # Directory
 source_dir: source
@@ -67,8 +53,9 @@ code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
   - README.md
-  - "_posts/Find unlinked files plugin output.md"
-  - "Find unlinked files plugin output.md"
+  - "_posts/find-unlinked-files-plugin-output.md"
+  - "find-unlinked-files-plugin-output.md"
+  - "**/find-unlinked-files-plugin-output.md"
 
 # Writing
 # see https://hexo.io/zh-cn/docs/configuration.html
@@ -76,24 +63,27 @@ new_post_name: :title.md # File name of new posts
 # 基本的页面，用来指定你文章的基本样式，不DIY的话请保持默认选项，
 # 也可在*.md中提供 layout: 'shuoshuo' 这种方式指定其他单独的页面样式(需DIY)
 default_layout: post
-# Title case：特征就是句首字母大写，一些较「实」的词要首字母大写，而那些冠词、连词、介词、be 等较「虚」的词首字母不大写。但这界限的划分方式有很多种，是否要让 be 的各种形式首字母大写是最大的变数。Title case 也是常用于标题的。
+# Title case：特征就是句首字母大写，一些较「实」的词要首字母大写，
+# 而那些冠词、连词、介词、be 等较「虚」的词首字母不大写。但这界限的划分方式有很多种，是否要让 be 的各种形式首字母大写是最大的变数。
+# Title case 也是常用于标题的。
 titlecase: false # Transform title into titlecase
 # 在新选项卡中打开外部链接
 external_link: # Open external links in new tab
   enable: true
 # filename_case	把文件名称转换为 1 小写或 2 大写
-filename_case: 1
+filename_case: 0
 # 对草稿提供渲染 render_drafts	显示草稿
 render_drafts: false
 # 图片文件夹
 post_asset_folder: true
-# 注意：relative_link是 Jekyll 和 GitHub 都建议关闭的功能
-# 默认情况下，Hexo 生成的超链接都是绝对地址。
+
+# 默认情况下，Hexo 生成的站外帖子超链接是绝对地址。站内帖子超链接是相对地址
 # 例如，如果您的网站域名为 example.com,您有一篇文章名为 hello，
-# 那么绝对链接可能像这样：http://example.com/hello.html，它是绝对于域名的。
+# 那么,绝对链接可能像这样：http://example.com/hello.html，它是绝对于域名的。
 # 相对链接像这样：/hello.html，也就是说，无论用什么域名访问该站点，都没有关系，
-# 这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。
-relative_link: false
+# 在进行反向代理时用到。这时设置为true,链接会被渲染为 /hello.html 或者/hello/ 根据前文你 permalink 的设置
+# relative_link是 Jekyll 和 GitHub 都建议关闭的功能,所以通常情况下，建议为false
+relative_link: true
 # 显示未来（Time）的文章
 future: true
 
@@ -153,7 +143,7 @@ category_generator:
   order_by: -date
 
 # Category & Tag
-default_category: article
+default_category: "文章"
 category_map: categorys
 tag_map: tags
 
@@ -243,18 +233,24 @@ markdown:
       options:
         # deaault: linkPattern: /\[\[([^\x00-\x1f|]+?)(\|([\s\S]+?))?\]\]/,          // accept anything, except control characters (CR, LF, etc) or |
         # linkPattern: /\[\[([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+)(\|([\w\s/\u4E00-\u9FA5A-Za-z0-9_\-#]+))?\]\]/
+
         # 将所有 wiki 链接渲染为绝对链接。
         # 默认： false
         # 这项要根据你前面对链接的渲染设置来更改
+        # 如果为false,url会被渲染为 ./ 开头,
+        # 这样可能会造成这种情况 https://lamirs-bmnc2o57v.vercel.app/index-la/python/
+        # 必须为true
         makeAllLinksAbsolute: true
+
         # 绝对链接的前缀
         # default: /
-        # baseURL: 'https://lamirs.vercel.app/'
+        baseURL: "/"
+
         # url的后缀,
         # default: .html
         # [[title home]] -> [title_home](...title_home/index.html),注意后缀从默认的.html更改为 /index.html
         # uriSuffix: '/index.html'
-        uriSuffix: ""
+        uriSuffix: "/"
   anchors:
     level: 1
     collisionSuffix: "v"

@@ -434,5 +434,6 @@ _admin-config.yml
 #/source/_posts/_云笔记/
 #/source/_posts/_私密信息/
 
-.vscode/
-!la-blog-source/.vscode/
+**/.vscode/
+hexo-cdn/
+**/obsidian/

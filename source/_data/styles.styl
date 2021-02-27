@@ -88,28 +88,40 @@
 	span.focus-links:hover{background-color:#318024}
 }
 
-//  更改背景图片
-body {
-	height: 100%;
-	width: 100%;
-	// 透明度 0.6 的黑色半透明遮罩
-	background-color: rgba(0, 0, 0, .5);
-	// 設置背景混和模式為相乘模式
-	background-blend-mode: multiply;
-	// 图片自适应剪裁,56.25%=1080/1920
-	// padding-top: 56.25%
-	background-image:url(https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php);
-	//这一行的括号里填背景图片的路径，将图片重命名为background.jpg放在\themes\next\source\images下
-	background-repeat: no-repeat;
-	background-attachment:fixed;
-	background-position:center center;
-	background-size:cover;
-}
-//body上的所有子元素, 包括
-.comments, .pagination, .post-block, .popup, .sidebar {
-    opacity:0.8;
-}
-
+// //  更改背景图片
+// body {
+// 	height: 100%;
+// 	width: 100%;
+// 	// 透明度 0.6 的黑色半透明遮罩
+// 	background-color: rgba(0, 0, 0, .5);
+// 	// 設置背景混和模式為相乘模式
+// 	background-blend-mode: multiply;
+// 	// 图片自适应剪裁,56.25%=1080/1920
+// 	// padding-top: 56.25%
+// 	background-image:url(https://api.dongmanxingkong.com/suijitupian/acg/1080p/index.php);
+// 	//这一行的括号里填背景图片的路径，将图片重命名为background.jpg放在\themes\next\source\images下
+// 	background-repeat: no-repeat;
+// 	background-attachment:fixed;
+// 	background-position:center center;
+// 	background-size:cover;
+// }
+// //body上的所有子元素, 包括
+// .comments, .pagination, .post-block, .popup, .sidebar {
+//     opacity:0.8;
+// }
+// // header需要单独设置,避免遮挡某些元素的点击事件
+// // 这里的rgb都是从main.css中扒出来的,之后从16进制转换成了rgba数据
+// .header-inner {
+// 	background: rgba(255,255,255,0.8);
+// }
+// // 针对darkmode单独设置
+// @media (prefers-color-scheme: dark){
+// 	.header-inner {
+// 		background: rgba(51,51,51,0.8);
+// 	}
+	
+// }
+// 页面头样式属性  .header-inner 
 // sidebar侧边工具栏样式属性  .sidebar
 // 文章版块样式 .post-block 
 // 评论系统  .comments
