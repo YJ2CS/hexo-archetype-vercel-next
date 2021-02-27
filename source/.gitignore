@@ -436,4 +436,4 @@ _admin-config.yml
 
 # add 配置文件夹
 !.vscode/
-!.obsidian/
+.obsidian/

@@ -9,6 +9,9 @@
 # See: https://theme-next.js.org/docs/theme-settings/
 # ---------------------------------------------------------------
 
+# 生产环境清单
+# hexo-cdn@3.2
+
 # Allow to cache content generation.
 cache:
   enable: true
@@ -49,13 +52,14 @@ darkmode: true
 
 favicon:
   #小图标 默认的NexT
-  small: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/icon/favicon-16x16-next.png
+  small: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/favicon_package_v0.16/favicon-16x16.png
   #中图标 默认NexT
-  medium: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/icon/favicon-32x32-next.png
+  medium: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/favicon_package_v0.16/favicon-32x32.png
   #苹果触摸图标
-  apple_touch_icon: /images/apple-touch-icon-next.png
+  apple_touch_icon: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/favicon_package_v0.16/apple-touch-icon.png
   #safari固定标签
-  safari_pinned_tab: /images/logo.svg
+  safari_pinned_tab: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/favicon_package_v0.16/safari-pinned-tab.svg
+  android_manifest: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/favicon_package_v0.16/site.webmanifest
 
 # Custom Logo (Warning: Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
@@ -82,8 +86,8 @@ creative_commons:
 # External url should start with http:// or https://
 menu: #目录 #首页 fa-home 字体漂亮图标 下同
   home: / || fa fa-home
-  # 基石内容 index-la
-  快速导航: /cdb0d1ce/ || fas fa-university
+  # 基石内容
+  快速导航: /index-la/ || fas fa-university
   about: /about/ || fa fa-user
   tags: /tags/ || fa fa-tags
   categories: /categories/ || fa fa-th
@@ -131,7 +135,7 @@ sidebar:
 # Sidebar Avatar
 avatar: #头像图片路径 图片放置在next/source/images
   # Replace the default image and set the url here.
-  url: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/avatar/avatar.webp
+  url: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/avatar/avatar.webp
   # If true, the avatar will be dispalyed in circle.
   #是否显示圆形头像，true表示圆形，false默认
   rounded: true
@@ -306,12 +310,12 @@ reward:
   #paypal: /images/paypal.png
   #bitcoin: /images/bitcoin.png
   #  paypal: #https://www.paypal.me/hojuncn
-  alipay: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/AliPayQR.webp # 小图二维码
-  #  alipayQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/AliPayQR.jpg
-  #  alipayHBQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/AliPayHBQR.jpg
-  wechat: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/WeChatQR.webp # 小图二维码
-#  wechatQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/WeChanQR.jpg #微信收款码
-#  wechatSQ: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@latest/donate/WeChanSQ.jpg #赞赏码
+  alipay: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/donate/AliPayQR.webp # 小图二维码
+  #  alipayQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/donate/AliPayQR.jpg
+  #  alipayHBQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/donate/AliPayHBQR.jpg
+  wechat: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/donate/WeChatQR.webp # 小图二维码
+#  wechatQR: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/donate/WeChanQR.jpg #微信收款码
+#  wechatSQ: https://cdn.jsdelivr.net/gh/yj2cs/hexo-cdn@3.2/donate/WeChanSQ.jpg #赞赏码
 
 # Subscribe through Telegram Channel, Twitter, etc.
 # Usage: `Key: permalink || icon` (Font Awesome)
@@ -615,7 +619,7 @@ comments:
   style: tabs
   # Choose a comment system to be displayed by default.
   # Available values: disqus | disqusjs | changyan | livere | gitalk | utterances
-  active: disqusjs
+  active:
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
